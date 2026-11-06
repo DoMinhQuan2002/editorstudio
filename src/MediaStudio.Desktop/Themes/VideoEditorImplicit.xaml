@@ -1,0 +1,17 @@
+<!--
+    Default control looks inside Video Editor screens. Each Video Editor view merges this
+    into its own resources, so Image Tools keeps its existing styling.
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/MediaStudio.Desktop;component/Themes/VideoEditorTheme.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <Style TargetType="Button" BasedOn="{StaticResource VE.SecondaryButton}" />
+    <Style TargetType="TextBox" BasedOn="{StaticResource VE.TextBox}" />
+    <Style TargetType="ComboBox" BasedOn="{StaticResource VE.ComboBox}" />
+    <Style TargetType="ComboBoxItem" BasedOn="{StaticResource VE.ComboBoxItem}" />
+    <Style TargetType="Slider" BasedOn="{StaticResource VE.Slider}" />
+    <Style TargetType="ScrollBar" BasedOn="{StaticResource VE.ScrollBar}" />
+    <Style TargetType="CheckBox" BasedOn="{StaticResource VE.CheckBox}" />
+</ResourceDictionary>

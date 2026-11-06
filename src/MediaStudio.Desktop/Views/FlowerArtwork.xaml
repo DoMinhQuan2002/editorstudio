@@ -1,0 +1,35 @@
+<UserControl x:Class="MediaStudio.Desktop.Views.FlowerArtwork"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="260" Height="280">
+    <Canvas Width="260" Height="280">
+        <Path Data="M130,196 C126,157 132,122 130,91" Stroke="#2E725A" StrokeThickness="9" StrokeStartLineCap="Round" />
+        <Path Data="M129,174 C98,142 72,145 48,153 C68,177 96,190 127,188 Z" Fill="#3F8B6B" />
+        <Path Data="M131,165 C154,132 180,127 211,133 C202,162 176,185 133,190 Z" Fill="#24664F" />
+        <Path Data="M54,156 C77,162 98,175 117,185" Stroke="#28634F" StrokeThickness="2" Opacity="0.8" />
+        <Path Data="M195,139 C175,153 157,170 140,185" Stroke="#174F3E" StrokeThickness="2" Opacity="0.8" />
+
+        <Ellipse Canvas.Left="111" Canvas.Top="15" Width="38" Height="58" Fill="#F5C85D" />
+        <Ellipse Canvas.Left="132" Canvas.Top="28" Width="38" Height="58" Fill="#F5C85D" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform><RotateTransform Angle="55" /></Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Canvas.Left="132" Canvas.Top="55" Width="38" Height="58" Fill="#F5C85D" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform><RotateTransform Angle="120" /></Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Canvas.Left="111" Canvas.Top="66" Width="38" Height="58" Fill="#F5C85D" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform><RotateTransform Angle="180" /></Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Canvas.Left="90" Canvas.Top="55" Width="38" Height="58" Fill="#F5C85D" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform><RotateTransform Angle="240" /></Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Canvas.Left="90" Canvas.Top="28" Width="38" Height="58" Fill="#F5C85D" RenderTransformOrigin="0.5,0.5">
+            <Ellipse.RenderTransform><RotateTransform Angle="300" /></Ellipse.RenderTransform>
+        </Ellipse>
+        <Ellipse Canvas.Left="110" Canvas.Top="46" Width="42" Height="42" Fill="#A46C36" />
+        <Ellipse Canvas.Left="120" Canvas.Top="56" Width="9" Height="9" Fill="#F5D786" />
+
+        <Path Data="M87,194 L174,194 L162,255 C160,263 154,269 146,269 L110,269 C102,269 96,263 94,255 Z" Fill="#CE785A" />
+        <Rectangle Canvas.Left="80" Canvas.Top="188" Width="101" Height="16" RadiusX="5" RadiusY="5" Fill="#D77C5E" />
+        <Path Data="M106,207 L112,233" Stroke="#F2C15B" StrokeThickness="4" StrokeStartLineCap="Round" />
+    </Canvas>
+</UserControl>

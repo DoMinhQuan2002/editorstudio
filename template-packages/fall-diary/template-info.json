@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "fall-diary",
+  "version": "0.9.0-reference-overlays",
+  "name": "Fall Diary",
+  "description": "Chọn 1–36 media theo thứ tự: mỗi nhóm 9 có 1 nền ảnh/video và tối đa 8 ảnh phủ được tách nền, cắt gọn và đặt lớn quanh giữa khung hình. Nền đầu dài 5,2 giây; mỗi nền tiếp theo dài 4 giây. Logo FALL DIARY chỉ hiện trong 1,2 giây đầu.",
+  "category": "Story",
+  "outputKind": "video",
+  "width": 1080,
+  "height": 1920,
+  "durationMs": 17200,
+  "scenes": [
+    { "name": "Nhóm nền 1", "durationMs": 5200 },
+    { "name": "Nhóm nền 2", "durationMs": 4000 },
+    { "name": "Nhóm nền 3", "durationMs": 4000 },
+    { "name": "Nhóm nền 4", "durationMs": 4000 }
+  ],
+  "definition": "template.json",
+  "poster": "preview/poster.jpg",
+  "demo": "preview/demo.mp4"
+}

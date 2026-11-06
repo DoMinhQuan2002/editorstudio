@@ -1,0 +1,6 @@
+# EasyOCR is installed with --no-deps so pip does not replace the pinned OpenCV/NumPy stack.
+easyocr==1.7.2
+opencv-python-headless==4.11.0.86
+python-bidi==0.6.11
+Shapely==2.1.2
+ninja==1.13.2

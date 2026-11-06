@@ -1,0 +1,424 @@
+<UserControl x:Class="MediaStudio.Desktop.Views.MediaSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:MediaStudio.Desktop.Views">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MediaStudio.Desktop;component/Themes/VideoEditorImplicit.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolVisibility" />
+
+            <!-- Library tile: whole tile is a button (click = select/deselect, drag = replace) -->
+            <Style x:Key="LibraryTile" TargetType="Button">
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Chrome" Background="White" BorderBrush="{StaticResource VE.Border}" BorderThickness="1"
+                                    CornerRadius="12" Padding="6">
+                                <ContentPresenter />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource VE.PrimaryBorder}" />
+                                </Trigger>
+                                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource VE.Primary}" />
+                                    <Setter TargetName="Chrome" Property="BorderThickness" Value="1.5" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsLibraryMarked}" Value="True">
+                                    <Setter TargetName="Chrome" Property="Background" Value="#DDD8FF" />
+                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="#6850FF" />
+                                    <Setter TargetName="Chrome" Property="BorderThickness" Value="2" />
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="FilterChip" TargetType="Button" BasedOn="{StaticResource VE.ChipButton}">
+                <Setter Property="MinHeight" Value="32" />
+                <Setter Property="Padding" Value="12,0" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Margin" Value="0,0,6,0" />
+            </Style>
+
+            <Style x:Key="MetaIcon" TargetType="TextBlock" BasedOn="{StaticResource VE.Icon}">
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Foreground" Value="{StaticResource VE.Muted}" />
+                <Setter Property="HorizontalAlignment" Value="Left" />
+            </Style>
+            <Style x:Key="MetaText" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="{StaticResource VE.TextSecondary}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="TextWrapping" Value="Wrap" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource VE.Page}">
+        <Border Style="{StaticResource VE.Card}" Margin="16,12,16,14" CornerRadius="18" Padding="18,12,18,14">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Title + filters -->
+                <Grid Grid.Row="1" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource VE.OutlineAccentButton}" MinHeight="32" Padding="10,0" Margin="0,0,12,0"
+                            Command="{Binding BackCommand}" AutomationProperties.AutomationId="SelectionBack" ToolTip="Quay lại">
+                        <TextBlock Text="&#xE72B;" FontFamily="{StaticResource VE.IconFont}" FontSize="13" />
+                    </Button>
+                    <TextBlock Grid.Column="1" Text="{Binding PageHeading}" ToolTip="{Binding PageDescription}" FontSize="17" FontWeight="SemiBold"
+                               Foreground="{StaticResource VE.Text}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,0,12,0" />
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <Button Style="{StaticResource FilterChip}" Tag="{Binding IsFilterAll}" Command="{Binding FilterCommand}" CommandParameter="all">
+                            <TextBlock Text="Tất cả" />
+                        </Button>
+                        <Button Style="{StaticResource FilterChip}" Tag="{Binding IsFilterImage}" Command="{Binding FilterCommand}" CommandParameter="image">
+                            <TextBlock Text="Ảnh" />
+                        </Button>
+                        <Button Style="{StaticResource FilterChip}" Tag="{Binding IsFilterVideo}" Command="{Binding FilterCommand}" CommandParameter="video">
+                            <TextBlock Text="Video" />
+                        </Button>
+                        <Button Style="{StaticResource FilterChip}" Command="{Binding ImportCommand}" AutomationProperties.AutomationId="ImportSelectionMedia">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="&#xE710;" FontFamily="{StaticResource VE.IconFont}" FontSize="12" VerticalAlignment="Center" Margin="0,0,9,0" />
+                                <TextBlock Text="Thêm media" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource FilterChip}" Command="{Binding ReloadCommand}" Foreground="{StaticResource VE.Primary}" Margin="0">
+                            <TextBlock Text="Tải lại" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <!-- Library | preview | details -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*" MinWidth="330" />
+                        <ColumnDefinition Width="14" />
+                        <ColumnDefinition Width="1.4*" />
+                        <ColumnDefinition Width="14" />
+                        <ColumnDefinition Width="0.7*" MinWidth="210" MaxWidth="280" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Library -->
+                    <Border Grid.Column="0" Background="White" BorderBrush="{StaticResource VE.Border}" BorderThickness="1" CornerRadius="14" Padding="14,12,6,10"
+                            PreviewKeyDown="OnLibraryKeyDown">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" Margin="2,0,0,10">
+                                <Run Text="Thư viện media (" /><Run Text="{Binding Media.Count, Mode=OneWay}" /><Run Text=")" />
+                            </TextBlock>
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding LibraryRuleHint}" FontSize="12" Foreground="{StaticResource VE.Muted}" Margin="2,0,0,6" TextTrimming="CharacterEllipsis" />
+                            <TextBlock DockPanel.Dock="Top" Text="+ Thêm vào mẫu · bấm thẻ để bôi đen · Ctrl + bấm để chọn thêm" FontSize="11" Foreground="{StaticResource VE.Muted}" Margin="2,0,0,6" />
+                            <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,6">
+                                <Button Content="Chọn tất cả" Command="{Binding MarkAllLibraryCommand}" Padding="8,4" Margin="0,0,6,0"
+                                        Visibility="{Binding HasMarkedMedia, Converter={StaticResource BoolVisibility}}" />
+                                <Button Content="{Binding DeleteLibraryLabel}" Command="{Binding DeleteLibraryCommand}" Padding="8,4" Foreground="#B42318"
+                                        ToolTip="Xóa khỏi thư viện. Giữ tệp gốc và media trong các dự án đã lưu."
+                                        Visibility="{Binding HasMarkedMedia, Converter={StaticResource BoolVisibility}}" />
+                            </WrapPanel>
+                            <TextBlock DockPanel.Dock="Top" Text="{Binding EmptyLibraryMessage}" FontSize="13" Foreground="{StaticResource VE.Muted}" TextWrapping="Wrap" Margin="2,12,8,0"
+                                       Visibility="{Binding IsLibraryEmpty, Converter={StaticResource BoolVisibility}}" />
+                            <Grid x:Name="LibrarySurface" Background="Transparent" Focusable="True" ClipToBounds="True"
+                                  PreviewMouseLeftButtonDown="OnLibraryMouseDown" PreviewMouseMove="OnLibraryMouseMove"
+                                  PreviewMouseLeftButtonUp="OnLibraryMouseUp" LostMouseCapture="OnLibraryLostCapture">
+                            <ScrollViewer x:Name="LibraryScroller" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                                <ItemsControl x:Name="LibraryItems" ItemsSource="{Binding Media}" Margin="0,0,4,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate><UniformGrid Columns="3" VerticalAlignment="Top" /></ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                    <Border Margin="0,0,8,8" CornerRadius="12" Padding="6">
+                                      <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="Background" Value="White" />
+                                            <Setter Property="BorderBrush" Value="{StaticResource VE.Border}" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsLibraryMarked}" Value="True">
+                                                    <Setter Property="Background" Value="#EAE7FF" />
+                                                    <Setter Property="BorderBrush" Value="#6850FF" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsDragging}" Value="True">
+                                                    <Setter Property="Opacity" Value="0.45" />
+                                                    <Setter Property="BorderBrush" Value="#6850FF" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                      </Border.Style>
+                                      <Grid>
+                                        <Button Background="Transparent" BorderThickness="0" Padding="0" ToolTip="Bấm để bôi đen (Ctrl/Shift để chọn thêm) · Kéo media vào dải Đã chọn để thêm">
+                                        <StackPanel>
+                                            <Grid Height="74">
+                                                <Border CornerRadius="8" Background="#ECEDF3">
+                                                    <TextBlock Text="{Binding ThumbnailProblem}" FontSize="11" Foreground="{StaticResource VE.Muted}"
+                                                               TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="8" />
+                                                </Border>
+                                                <Border CornerRadius="8">
+                                                    <Border.Background>
+                                                        <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="UniformToFill" />
+                                                    </Border.Background>
+                                                </Border>
+                                                <!-- Selection number -->
+                                                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="6" Width="24" Height="24" CornerRadius="12"
+                                                        Background="{StaticResource VE.Primary}"
+                                                        Visibility="{Binding IsSelected, Converter={StaticResource BoolVisibility}}">
+                                                    <TextBlock Text="{Binding Order}" Foreground="White" FontSize="12" FontWeight="SemiBold"
+                                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </Border>
+                                                <!-- Video duration -->
+                                                <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="7" CornerRadius="8" Padding="7,2"
+                                                        Background="#B3121218" Visibility="{Binding IsVideo, Converter={StaticResource BoolVisibility}}">
+                                                    <TextBlock Text="{Binding DurationBadge}" Foreground="White" FontSize="12" />
+                                                </Border>
+                                                <TextBlock Text="&#xE714;" FontFamily="{StaticResource VE.IconFont}" FontSize="14" Foreground="White"
+                                                           HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="9,0,0,8"
+                                                           Visibility="{Binding IsVideo, Converter={StaticResource BoolVisibility}}" />
+                                            </Grid>
+                                            <TextBlock Text="{Binding Media.FileName}" FontSize="13" Foreground="{StaticResource VE.Primary}"
+                                                       TextTrimming="CharacterEllipsis" Margin="3,6,3,0" />
+                                            <TextBlock Text="{Binding Caption}" FontSize="11" Foreground="{StaticResource VE.Muted}" Margin="3,1,3,1" />
+                                        </StackPanel>
+                                    </Button>
+                                        <Button Tag="AddToSequence" Width="26" Height="26" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,0,2,0"
+                                                Background="White" BorderBrush="#D8D4E7" BorderThickness="1" Padding="0"
+                                                Command="{Binding DataContext.AddToSelectionCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"
+                                                ToolTip="Thêm media này vào mẫu">
+                                            <TextBlock Text="&#xE710;" FontFamily="{StaticResource VE.IconFont}" FontSize="13" Foreground="{StaticResource VE.Primary}"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Button>
+                                      </Grid>
+                                    </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </ScrollViewer>
+                            <Canvas IsHitTestVisible="False">
+                                <Rectangle x:Name="LibraryMarquee" Visibility="Collapsed" Stroke="#6850FF" StrokeThickness="1" Fill="#306850FF" />
+                            </Canvas>
+                            </Grid>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Large preview (video templates) -->
+                    <Border Grid.Column="2" Background="#1B1F27" CornerRadius="14" ClipToBounds="True"
+                            Visibility="{Binding IsMediaPreview, Converter={StaticResource BoolVisibility}}">
+                        <Grid>
+                            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                            <Grid ClipToBounds="True" Margin="70,8,70,0">
+                                <TextBlock Text="Chọn một media để xem trước" FontSize="14" Foreground="#9AA0B4"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <Image x:Name="LargePreview" Source="{Binding ActiveMedia.Thumbnail}" Stretch="Uniform"
+                                       RenderOptions.BitmapScalingMode="HighQuality" RenderTransformOrigin="0.5,0.5">
+                                    <Image.RenderTransform><ScaleTransform x:Name="PreviewZoom" ScaleX="1" ScaleY="1" /></Image.RenderTransform>
+                                </Image>
+                            </Grid>
+                            <Button Style="{StaticResource VE.CircleButton}" Click="OnPreviousMedia" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                    Margin="16,0,0,0" Width="46" Height="46" Background="#2D323D" Foreground="White" BorderBrush="#3A404C" ToolTip="Media trước">
+                                <TextBlock Text="&#xE76B;" FontFamily="{StaticResource VE.IconFont}" FontSize="13" />
+                            </Button>
+                            <Button Style="{StaticResource VE.CircleButton}" Click="OnNextMedia" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                    Margin="0,0,16,0" Width="46" Height="46" Background="#2D323D" Foreground="White" BorderBrush="#3A404C" ToolTip="Media sau">
+                                <TextBlock Text="&#xE76C;" FontFamily="{StaticResource VE.IconFont}" FontSize="13" />
+                            </Button>
+                            <Grid Grid.Row="1" Margin="14,10,14,12">
+                                <Border HorizontalAlignment="Center" Background="#2A2F3A" CornerRadius="8" Padding="4,2">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button Style="{StaticResource VE.PlayerIconButton}" Click="OnZoomOut" ToolTip="Thu nhỏ" Width="34" Height="30">
+                                            <TextBlock Text="&#xE738;" FontFamily="{StaticResource VE.IconFont}" FontSize="12" />
+                                        </Button>
+                                        <TextBlock x:Name="ZoomLabel" Text="100%" Foreground="White" FontSize="14" Width="54" TextAlignment="Center" VerticalAlignment="Center" />
+                                        <Button Style="{StaticResource VE.PlayerIconButton}" Click="OnZoomIn" ToolTip="Phóng to" Width="34" Height="30">
+                                            <TextBlock Text="&#xE710;" FontFamily="{StaticResource VE.IconFont}" FontSize="12" />
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                                <Button Style="{StaticResource VE.PlayerIconButton}" Click="OnPreviewFullscreen" HorizontalAlignment="Right" ToolTip="Toàn màn hình">
+                                    <TextBlock Text="&#xE740;" FontFamily="{StaticResource VE.IconFont}" FontSize="15" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Border>
+
+                    <!-- Photo story templates: the page layout with the photos picked so far, live -->
+                    <Border Grid.Column="2" Background="#1B1F27" CornerRadius="16" Padding="14"
+                            Visibility="{Binding IsStoryPreview, Converter={StaticResource BoolVisibility}}">
+                        <DockPanel>
+                            <DockPanel DockPanel.Dock="Top" Margin="2,0,2,10">
+                                <TextBlock Text="{Binding StoryPageLabel}" DockPanel.Dock="Right" Foreground="#C9C4DA" FontSize="13" VerticalAlignment="Center" />
+                                <TextBlock Text="Xem trước mẫu" Foreground="White" FontSize="16" FontWeight="SemiBold" />
+                            </DockPanel>
+                            <DockPanel DockPanel.Dock="Bottom" Margin="0,10,0,0" LastChildFill="False">
+                                <Button DockPanel.Dock="Left" Style="{StaticResource VE.CircleButton}" Command="{Binding PreviousStoryPageCommand}"
+                                        Background="#2C2833" Foreground="White" BorderBrush="#3A3542" ToolTip="Trang trước">
+                                    <TextBlock Text="&#xE76B;" FontFamily="{StaticResource VE.IconFont}" FontSize="12" />
+                                </Button>
+                                <Button DockPanel.Dock="Right" Style="{StaticResource VE.CircleButton}" Command="{Binding NextStoryPageCommand}"
+                                        Background="#2C2833" Foreground="White" BorderBrush="#3A3542" ToolTip="Trang sau">
+                                    <TextBlock Text="&#xE76C;" FontFamily="{StaticResource VE.IconFont}" FontSize="12" />
+                                </Button>
+                                <ItemsControl ItemsSource="{Binding StoryPageDots}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" HorizontalAlignment="Center" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Button Command="{Binding DataContext.GoToStoryPageCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"
+                                                    Margin="3,0" Cursor="Hand" ToolTip="{Binding Page}">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="Transparent" Padding="2">
+                                                            <Ellipse x:Name="Dot" Width="8" Height="8" Fill="#5E5868" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <DataTrigger Binding="{Binding IsCurrent}" Value="True">
+                                                                <Setter TargetName="Dot" Property="Fill" Value="White" />
+                                                            </DataTrigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DockPanel>
+                            <Grid>
+                                <Image Source="{Binding StoryPreviewImage}" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" />
+                                <TextBlock Text="Đang cập nhật…" Foreground="White" FontSize="12" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,6"
+                                           Visibility="{Binding IsStoryPreviewLoading, Converter={StaticResource BoolVisibility}}" />
+                            </Grid>
+                        </DockPanel>
+                    </Border>
+
+                    <!-- Active media details -->
+                    <Border Grid.Column="4" Background="White" BorderBrush="{StaticResource VE.Border}" BorderThickness="1" CornerRadius="14" Padding="18,14">
+                        <StackPanel>
+                            <TextBlock Text="Media đang chọn" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" Margin="0,0,0,12" />
+                            <Border Height="180" CornerRadius="10" Background="#F4F5F9" BorderBrush="{StaticResource VE.Border}" BorderThickness="1" Padding="6">
+                                <Grid>
+                                    <TextBlock Text="Chưa chọn media" FontSize="13" Foreground="{StaticResource VE.Muted}"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    <Image Source="{Binding ActiveMedia.Thumbnail}" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality" />
+                                </Grid>
+                            </Border>
+                            <TextBlock Text="{Binding ActiveMedia.Media.FileName}" ToolTip="{Binding ActiveMedia.Media.FileName}" FontSize="14"
+                                       Foreground="{StaticResource VE.Text}" TextTrimming="CharacterEllipsis" Margin="0,12,0,10" />
+                            <Grid Visibility="{Binding HasActiveMedia, Converter={StaticResource BoolVisibility}}">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="30" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions><RowDefinition Height="28" /><RowDefinition Height="28" /><RowDefinition Height="28" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                                <TextBlock Text="&#xEB9F;" Style="{StaticResource MetaIcon}" />
+                                <TextBlock Grid.Column="1" Text="{Binding ActiveMedia.TypeText}" Style="{StaticResource MetaText}" />
+                                <TextBlock Grid.Row="1" Text="&#xE7F4;" Style="{StaticResource MetaIcon}" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ActiveMedia.ResolutionText}" Style="{StaticResource MetaText}" />
+                                <TextBlock Grid.Row="2" Text="&#xE7B8;" Style="{StaticResource MetaIcon}" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ActiveMedia.SizeText}" Style="{StaticResource MetaText}" />
+                                <TextBlock Grid.Row="3" Text="&#xE946;" Style="{StaticResource MetaIcon}" VerticalAlignment="Top" Margin="0,5,0,0" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Text="Thumbnail nguồn • chưa áp dụng mẫu, chưa render video"
+                                           Style="{StaticResource MetaText}" FontSize="13" Foreground="{StaticResource VE.Muted}" Margin="0,4,0,0" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+
+                <!-- Selection bar -->
+                <Border Grid.Row="3" Background="White" BorderBrush="{StaticResource VE.Border}" BorderThickness="1" CornerRadius="14"
+                        Padding="16,10" Margin="0,12,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions><RowDefinition Height="Auto" /><RowDefinition Height="Auto" /></Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                        <StackPanel VerticalAlignment="Center" Margin="0,0,16,0">
+                            <TextBlock Text="{Binding SelectionSummary}" FontSize="14" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" />
+                            <TextBlock Text="{Binding Status}" ToolTip="{Binding Status}" FontSize="12" Foreground="{StaticResource VE.Muted}"
+                                       TextTrimming="CharacterEllipsis" Margin="0,2,0,0" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                            <Button Style="{StaticResource VE.SecondaryButton}" MinHeight="42" Padding="18,0" Command="{Binding ClearCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="&#xE74D;" FontFamily="{StaticResource VE.IconFont}" FontSize="14" VerticalAlignment="Center" Margin="0,0,10,0" />
+                                    <TextBlock Text="Xóa lựa chọn" FontSize="15" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                            <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="42" Padding="22,0" Margin="10,0,0,0"
+                                    Command="{Binding ContinueCommand}" AutomationProperties.AutomationId="ContinueToTemplateProcessing"
+                                    ToolTip="{Binding Status}" ToolTipService.ShowOnDisabled="True">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ContinueButtonLabel}" FontSize="16" VerticalAlignment="Center" />
+                                    <TextBlock Text="&#xE72A;" FontFamily="{StaticResource VE.IconFont}" FontSize="14" VerticalAlignment="Center" Margin="12,1,0,0" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2" x:Name="SelectedStrip" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Disabled"
+                                      CanContentScroll="False" PanningMode="HorizontalOnly" Height="104" Margin="0,6,44,0" AllowDrop="True" Background="#FAFAFE"
+                                      DragOver="OnStripDragOver" Drop="OnStripDrop" DragLeave="OnStripDragLeave"
+                                      ToolTip="Kéo media từ thư viện thả lên một media để thay, kéo trong hàng để đổi thứ tự, thả vào chỗ trống để thêm vào cuối">
+                            <ItemsControl ItemsSource="{Binding Selected}">
+                                <ItemsControl.ItemsPanel><ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate></ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Width="108" Margin="0,4,8,4" Padding="4" CornerRadius="10" BorderThickness="2" BorderBrush="Transparent" Background="#F4F4F9"
+                                                AllowDrop="True" DragEnter="OnSelectedDragEnter" DragOver="OnSelectedDragOver" DragLeave="OnSelectedDragLeave" Drop="OnSelectedDrop">
+                                            <StackPanel>
+                                                <Grid Height="54">
+                                                    <Button Command="{Binding DataContext.FocusCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"
+                                                            ToolTip="Kéo media khác thả vào đây để thay; kéo media này sang vị trí khác để đổi chỗ"
+                                                            PreviewMouseLeftButtonDown="OnDragSourceMouseDown" PreviewMouseMove="OnDragSourceMouseMove" PreviewMouseLeftButtonUp="OnDragSourceMouseUp">
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border CornerRadius="7" Cursor="Hand">
+                                                                    <Border.Background>
+                                                                        <ImageBrush ImageSource="{Binding Thumbnail}" Stretch="UniformToFill" />
+                                                                    </Border.Background>
+                                                                </Border>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                    <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="4" MinWidth="22" Height="22" CornerRadius="6"
+                                                            Background="{StaticResource VE.Primary}" Padding="5,0" IsHitTestVisible="False">
+                                                        <TextBlock Text="{Binding Order}" Foreground="White" FontSize="12" FontWeight="SemiBold"
+                                                                   HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                    </Border>
+                                                    <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="4" ToolTip="Bỏ chọn"
+                                                            Command="{Binding DataContext.ToggleCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}">
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border x:Name="X" Width="20" Height="20" CornerRadius="10" Background="White" Cursor="Hand">
+                                                                    <TextBlock Text="&#xE711;" FontFamily="{StaticResource VE.IconFont}" FontSize="9"
+                                                                               Foreground="{StaticResource VE.Text}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="X" Property="Background" Value="{StaticResource VE.PrimaryTint}" />
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </Grid>
+                                                <TextBlock Text="{Binding SlotLabel}" FontSize="13" Foreground="{StaticResource VE.TextSecondary}"
+                                                           HorizontalAlignment="Center" TextTrimming="CharacterEllipsis" Margin="0,6,0,1" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource VE.CircleButton}" Click="OnStripRight"
+                                HorizontalAlignment="Right" VerticalAlignment="Center" Width="34" Height="34" Margin="0,8,0,0" ToolTip="Cuộn sang phải">
+                            <TextBlock Text="&#xE76C;" FontFamily="{StaticResource VE.IconFont}" FontSize="11" />
+                        </Button>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

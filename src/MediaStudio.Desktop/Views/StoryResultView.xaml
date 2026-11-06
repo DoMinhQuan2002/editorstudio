@@ -1,0 +1,240 @@
+<UserControl x:Class="MediaStudio.Desktop.Views.StoryResultView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:MediaStudio.Desktop.ViewModels"
+             xmlns:views="clr-namespace:MediaStudio.Desktop.Views"
+             AutomationProperties.AutomationId="StoryResult">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVisibility" />
+        <Style x:Key="StoryActionButton" TargetType="Button">
+            <Setter Property="Padding" Value="14,8" />
+            <Setter Property="MinHeight" Value="38" />
+            <Setter Property="BorderBrush" Value="#DEDDED" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#5548D8" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style x:Key="StoryPageArrowButton" TargetType="Button">
+            <Setter Property="Width" Value="42" />
+            <Setter Property="Height" Value="42" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Background" Value="#990E0E12" />
+            <Setter Property="BorderBrush" Value="#66FFFFFF" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+        </Style>
+        <Style x:Key="StoryPageDotButton" TargetType="Button">
+            <Setter Property="Padding" Value="3,0" />
+            <Setter Property="Margin" Value="1,0" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#BEBCC8" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                    <Setter Property="Foreground" Value="#FFFFFF" />
+                    <Setter Property="FontSize" Value="17" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#FAFAFC" Margin="16,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="48" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="115" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Content="← Quay lại" Command="{Binding BackCommand}" Style="{StaticResource StoryActionButton}"
+                    HorizontalAlignment="Left" AutomationProperties.AutomationId="StoryBack" />
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="✓  Chọn ảnh" Foreground="#6657F5" FontWeight="SemiBold" Margin="8,0" />
+                <TextBlock Text="────" Foreground="#DAD9E6" />
+                <TextBlock Text="2  Xem và lưu ảnh" Foreground="#5043F0" FontWeight="Bold" Margin="8,0" />
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Margin="0,7,0,10">
+            <TextBlock FontSize="23" FontWeight="Bold" Foreground="#202238">
+                <Run Text="{Binding Title, Mode=OneWay}" /><Run Text=" · Ảnh story" />
+            </TextBlock>
+            <TextBlock Text="{Binding Status}" FontSize="12" Foreground="#6D6E85" Margin="0,4,0,0" TextWrapping="Wrap" />
+            <TextBlock Text="{Binding ErrorMessage}" FontSize="12" Foreground="#A53E4A" Margin="0,4,0,0" TextWrapping="Wrap" />
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="14" />
+                <ColumnDefinition Width="1.4*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Selected page at full 9:16, black bars included, as it will be posted. -->
+            <Border Grid.Column="0" Background="#0E0E12" CornerRadius="10" Padding="8">
+                <Grid>
+                    <Image Source="{Binding SelectedPage.Image}" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"
+                           AutomationProperties.AutomationId="StoryPagePreview" />
+                    <Button Content="‹" Command="{Binding PreviousPageCommand}" HorizontalAlignment="Left" VerticalAlignment="Center"
+                            Margin="8,0" Style="{StaticResource StoryPageArrowButton}" ToolTip="Trang trước"
+                            AutomationProperties.AutomationId="StoryPreviousPage" />
+                    <Button Content="›" Command="{Binding NextPageCommand}" HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Margin="8,0" Style="{StaticResource StoryPageArrowButton}" ToolTip="Trang tiếp theo"
+                            AutomationProperties.AutomationId="StoryNextPage" />
+                    <Border HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10"
+                            Background="#990E0E12" CornerRadius="14" Padding="8,3">
+                        <ItemsControl ItemsSource="{Binding Pages}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:StoryPageViewModel}">
+                                    <Button Content="{Binding IndicatorGlyph}"
+                                            Command="{Binding DataContext.SelectPageCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding}" Style="{StaticResource StoryPageDotButton}"
+                                            ToolTip="{Binding Label}" AutomationProperties.Name="{Binding Label}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Border>
+                    <TextBlock Text="Đang dựng ảnh…" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"
+                               Visibility="{Binding IsBusy, Converter={StaticResource BoolVisibility}}" />
+                </Grid>
+            </Border>
+
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <ItemsControl ItemsSource="{Binding Pages}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate><WrapPanel /></ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:StoryPageViewModel}">
+                            <Button Command="{Binding DataContext.SelectPageCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                    CommandParameter="{Binding}" Margin="0,0,10,10" Padding="0" Background="White"
+                                    Cursor="Hand" AutomationProperties.Name="{Binding Label}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="BorderBrush" Value="#E0DFEA" />
+                                        <Setter Property="BorderThickness" Value="1" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                <Setter Property="BorderBrush" Value="#6455F5" />
+                                                <Setter Property="BorderThickness" Value="3" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel>
+                                    <Image Source="{Binding Thumbnail}" Width="126" Height="224" Stretch="Uniform" />
+                                    <TextBlock Text="{Binding Label}" FontSize="11" FontWeight="SemiBold" Foreground="#33344A"
+                                               HorizontalAlignment="Center" Margin="0,5,0,6" />
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.Row="3" Margin="0,8,0,0">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Content="Dựng lại" Command="{Binding RenderCommand}" Style="{StaticResource StoryActionButton}" />
+            <Button Grid.Column="2" Content="Mở thư mục ảnh" Command="{Binding OpenFolderCommand}" Style="{StaticResource StoryActionButton}" Margin="6,0" />
+            <Button Grid.Column="3" Content="Lưu tất cả ảnh…" Command="{Binding SaveAllCommand}" Padding="17,8" MinHeight="38"
+                    Background="#6455F5" Foreground="White" BorderBrush="#6455F5" FontWeight="SemiBold"
+                    AutomationProperties.AutomationId="StorySaveAll" />
+        </Grid>
+
+        <!-- Processing screen while the pages render: same ring, percentage and steps as the video templates. -->
+        <Border Grid.Row="0" Grid.RowSpan="4" Panel.ZIndex="10" Background="White" BorderBrush="#E5E7EE" BorderThickness="1"
+                CornerRadius="9" Visibility="{Binding IsProcessingScreenVisible, Converter={StaticResource BoolVisibility}}">
+            <Grid>
+                <Button Content="← Quay lại" Command="{Binding BackCommand}" Style="{StaticResource StoryActionButton}"
+                        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,12" />
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Margin="0,56,0,0">
+                    <StackPanel Width="560" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10">
+                        <Grid Width="188" Height="188" HorizontalAlignment="Center" Margin="0,0,0,15">
+                            <views:ProgressRing Progress="{Binding ProgressPercent}" IsActive="{Binding IsBusy}">
+                                <views:ProgressRing.Style>
+                                    <Style TargetType="views:ProgressRing">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasFailed}" Value="True">
+                                                <Setter Property="RingBrush" Value="#B63243" />
+                                                <Setter Property="TrackBrush" Value="#F8E2E5" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </views:ProgressRing.Style>
+                            </views:ProgressRing>
+                            <TextBlock Text="{Binding ProgressLabel}" FontSize="38" FontWeight="Bold" Foreground="#1D2435"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                        <TextBlock Text="{Binding Heading}" FontSize="27" FontWeight="Bold" Foreground="#1D2435"
+                                   HorizontalAlignment="Center" TextAlignment="Center" />
+                        <TextBlock Text="{Binding Description}" FontSize="16" Foreground="#69718A"
+                                   TextAlignment="Center" TextWrapping="Wrap" MaxWidth="560" Margin="0,9,0,0" />
+                        <ItemsControl ItemsSource="{Binding Stages}" Width="470" HorizontalAlignment="Center" Margin="54,22,0,0">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:StoryStageViewModel}">
+                                    <Grid MinHeight="44" Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="48" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border x:Name="StageBadge" Width="32" Height="32" CornerRadius="16" Background="#F0F1F5"
+                                                HorizontalAlignment="Left" VerticalAlignment="Center">
+                                            <TextBlock x:Name="StageGlyph" Text="{Binding Glyph}" FontSize="16" FontWeight="Bold"
+                                                       Foreground="#B7BDCB" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                        <views:ProgressRing x:Name="StageSpinner" Width="30" Height="30" Thickness="3" IsActive="False"
+                                                            Visibility="Collapsed" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}" FontSize="16" Foreground="#202638" />
+                                            <TextBlock Text="{Binding Message}" FontSize="11" Foreground="#787D8D" TextWrapping="Wrap" MaxWidth="430" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Status}" Value="COMPLETED">
+                                            <Setter TargetName="StageBadge" Property="Background" Value="#5C4BFF" />
+                                            <Setter TargetName="StageGlyph" Property="Foreground" Value="White" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Status}" Value="RUNNING">
+                                            <Setter TargetName="StageBadge" Property="Visibility" Value="Collapsed" />
+                                            <Setter TargetName="StageSpinner" Property="Visibility" Value="Visible" />
+                                            <Setter TargetName="StageSpinner" Property="IsActive" Value="True" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Status}" Value="FAILED">
+                                            <Setter TargetName="StageBadge" Property="Background" Value="#FCE9EA" />
+                                            <Setter TargetName="StageGlyph" Property="Foreground" Value="#B63243" />
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <Border Background="#FCEDEE" BorderBrush="#F0C5C9" BorderThickness="1" CornerRadius="8"
+                                Padding="12,9" Margin="0,14,0,0" MaxWidth="550"
+                                Visibility="{Binding HasFailed, Converter={StaticResource BoolVisibility}}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding ErrorMessage}" Foreground="#912F3D" TextWrapping="Wrap" />
+                                <Button Content="Thử lại" Command="{Binding RenderCommand}" HorizontalAlignment="Right"
+                                        Padding="12,5" Margin="0,7,0,0" Background="White" Foreground="#5144E8" BorderBrush="#D9DCEF" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

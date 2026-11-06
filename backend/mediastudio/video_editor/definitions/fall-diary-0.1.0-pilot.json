@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "templateId": "fall-diary",
+  "version": "0.1.0-pilot",
+  "name": "Fall Diary",
+  "width": 1080,
+  "height": 1920,
+  "frameRateNumerator": 30,
+  "frameRateDenominator": 1,
+  "durationTicks": 1350000,
+  "demoAssetReference": "local_reference/fall_diary/demo/fall_diary_reference.mp4",
+  "posterAssetReference": null,
+  "audioAssetReference": null,
+  "supportedCapabilities": [
+    "full_frame_image",
+    "hard_cut",
+    "multi_layer_collage",
+    "static_transform",
+    "static_opacity",
+    "text_overlay"
+  ],
+  "slots": [
+    {"slotId": "photo-01", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-02", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-03", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-04", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-05", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-06", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-07", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-08", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-09", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-10", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-11", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"},
+    {"slotId": "photo-12", "allowedMediaKinds": ["image"], "required": true, "reusePolicy": "unique_asset", "missingSlotPolicy": "error"}
+  ],
+  "events": [
+    {
+      "eventId": "scene-01",
+      "timelineStartTicks": 0,
+      "durationTicks": 225000,
+      "layers": [
+        {"layerId": "scene-01-background", "kind": "image", "layerOrder": 0, "slotId": "photo-01", "fitMode": "cover"},
+        {"layerId": "scene-01-card", "kind": "image", "layerOrder": 1, "slotId": "photo-02", "fitMode": "contain", "positionX": 0.18, "positionY": -0.18, "scale": 0.58, "rotation": -6, "opacity": 0.96}
+      ]
+    },
+    {
+      "eventId": "scene-02",
+      "timelineStartTicks": 225000,
+      "durationTicks": 225000,
+      "layers": [
+        {"layerId": "scene-02-background", "kind": "image", "layerOrder": 0, "slotId": "photo-03", "fitMode": "cover"},
+        {"layerId": "scene-02-card", "kind": "image", "layerOrder": 1, "slotId": "photo-04", "fitMode": "contain", "positionX": -0.2, "positionY": 0.08, "scale": 0.52, "rotation": 5, "opacity": 0.96}
+      ]
+    },
+    {
+      "eventId": "scene-03",
+      "timelineStartTicks": 450000,
+      "durationTicks": 225000,
+      "layers": [
+        {"layerId": "scene-03-background", "kind": "image", "layerOrder": 0, "slotId": "photo-05", "fitMode": "cover"},
+        {"layerId": "scene-03-card", "kind": "image", "layerOrder": 1, "slotId": "photo-06", "fitMode": "contain", "positionX": -0.18, "positionY": -0.1, "scale": 0.5, "rotation": -5, "opacity": 0.95}
+      ]
+    },
+    {
+      "eventId": "scene-04",
+      "timelineStartTicks": 675000,
+      "durationTicks": 225000,
+      "layers": [
+        {"layerId": "scene-04-background", "kind": "image", "layerOrder": 0, "slotId": "photo-07", "fitMode": "cover"},
+        {"layerId": "scene-04-card", "kind": "image", "layerOrder": 1, "slotId": "photo-08", "fitMode": "contain", "positionX": -0.2, "positionY": 0.1, "scale": 0.52, "rotation": 6, "opacity": 0.95}
+      ]
+    },
+    {
+      "eventId": "scene-05",
+      "timelineStartTicks": 900000,
+      "durationTicks": 225000,
+      "layers": [
+        {"layerId": "scene-05-background", "kind": "image", "layerOrder": 0, "slotId": "photo-09", "fitMode": "cover"},
+        {"layerId": "scene-05-card", "kind": "image", "layerOrder": 1, "slotId": "photo-10", "fitMode": "contain", "positionX": -0.18, "positionY": -0.1, "scale": 0.5, "rotation": -4, "opacity": 0.95}
+      ]
+    },
+    {
+      "eventId": "scene-06",
+      "timelineStartTicks": 1125000,
+      "durationTicks": 225000,
+      "layers": [
+        {"layerId": "scene-06-background", "kind": "image", "layerOrder": 0, "slotId": "photo-11", "fitMode": "cover"},
+        {"layerId": "scene-06-card", "kind": "image", "layerOrder": 1, "slotId": "photo-12", "fitMode": "contain", "positionX": -0.16, "positionY": 0.08, "scale": 0.52, "rotation": 5, "opacity": 0.95}
+      ]
+    },
+    {
+      "eventId": "title-overlay",
+      "timelineStartTicks": 0,
+      "durationTicks": 1350000,
+      "layers": [
+        {"layerId": "fall-diary-title", "kind": "text", "layerOrder": 3, "text": "FALL\nDIARY", "textX": 0.5, "textY": 0.5, "fontSize": 76, "color": "#FFFFFF", "fontFamily": "Arial", "opacity": 0.94}
+      ]
+    }
+  ]
+}

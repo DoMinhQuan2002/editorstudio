@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "templateId": "fall-diary",
+  "version": "0.6.0-dynamic-batches",
+  "name": "Fall Diary Layer Structure Pilot 0.5",
+  "width": 720,
+  "height": 1556,
+  "frameRateNumerator": 30,
+  "frameRateDenominator": 1,
+  "durationTicks": 1530000,
+  "demoAssetReference": null,
+  "posterAssetReference": null,
+  "audioAssetReference": null,
+  "supportedCapabilities": [
+    "automatic_foreground_cutout",
+    "dynamic_background_batches_of_nine",
+    "dynamic_position_scale_rotation_opacity",
+    "event_classification_evidence",
+    "full_frame_image",
+    "hard_cut",
+    "image_slot_reuse",
+    "independent_visual_event_timing_90khz",
+    "linear_keyframes_90khz",
+    "multi_layer_collage",
+    "preview_export_shared_renderer",
+    "safe_area_contain_cards",
+    "static_template_image_asset",
+    "versioned_editorial_safe_layout",
+    "video_backgrounds"
+  ],
+  "slots": [
+    {
+      "slotId": "group-01-background",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "group-01-overlay-01",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": false,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "skip_event"
+    }
+  ],
+  "events": [
+    {
+      "eventId": "group-01-background",
+      "timelineStartTicks": 0,
+      "durationTicks": 1530000,
+      "eventClassification": "BACKGROUND_CUT",
+      "sourceEvidence": "The first selected image or video starts a background group with an editable 17-second still-image default.",
+      "layers": [
+        {
+          "layerId": "group-01-background",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "group-01-background",
+          "fitMode": "cover",
+          "positionX": 0.0,
+          "positionY": 0.0,
+          "scale": 1.0
+        }
+      ]
+    },
+    {
+      "eventId": "group-01-overlay-01",
+      "timelineStartTicks": 0,
+      "durationTicks": 1530000,
+      "eventClassification": "OVERLAY_APPEAR",
+      "sourceEvidence": "Overlay images are automatically background-removed and shown sequentially over their group background.",
+      "layers": [
+        {
+          "layerId": "group-01-overlay-01",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "group-01-overlay-01",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": 0.3,
+          "scale": 0.18,
+          "removeBackground": true
+        }
+      ]
+    },
+    {
+      "eventId": "title-graphic",
+      "timelineStartTicks": 0,
+      "durationTicks": 1530000,
+      "eventClassification": "OVERLAY_APPEAR",
+      "sourceEvidence": "The supplied Fall Diary keycap SVG is centered over the composition for its full duration.",
+      "layers": [
+        {
+          "layerId": "title-fall-diary-vector",
+          "kind": "image",
+          "layerOrder": 20,
+          "assetReference": "assets/fall_diary_vector.png",
+          "fitMode": "contain",
+          "positionX": 0.0,
+          "positionY": 0.006,
+          "scale": 0.42,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ]
+    }
+  ],
+  "assetDependencies": [],
+  "metadata": {
+    "selectionPolicy": {
+      "mode": "background-batches-of-nine",
+      "maximumMediaCount": 36,
+      "groupSize": 9,
+      "backgroundMediaKinds": [
+        "image",
+        "video"
+      ],
+      "overlayMediaKind": "image",
+      "maximumOverlaysPerGroup": 8,
+      "stillBackgroundDurationMs": 17000,
+      "videoBackgroundDuration": "source-duration"
+    },
+    "sourceEvidence": "Dynamic groups: every 9 selected items start with 1 background followed by up to 8 automatically cut-out image overlays; maximum 36 selected items."
+  }
+}

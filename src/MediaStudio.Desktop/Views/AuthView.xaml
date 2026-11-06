@@ -1,0 +1,287 @@
+<UserControl x:Class="MediaStudio.Desktop.Views.AuthView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:MediaStudio.Desktop.Views"
+             AutomationProperties.AutomationId="AuthScreen">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MediaStudio.Desktop;component/Themes/VideoEditorImplicit.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolVisibility" />
+            <views:AnyTrueVisibilityConverter x:Key="AnyTrue" />
+            <Style x:Key="FieldLabel" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Foreground" Value="{StaticResource VE.Text}" />
+                <Setter Property="Margin" Value="0,14,0,6" />
+            </Style>
+            <Style x:Key="Field" TargetType="TextBox" BasedOn="{StaticResource VE.TextBox}">
+                <Setter Property="MinHeight" Value="44" />
+                <Setter Property="FontSize" Value="15" />
+            </Style>
+            <Style x:Key="PasswordField" TargetType="PasswordBox">
+                <Setter Property="MinHeight" Value="44" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="Padding" Value="12,0" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Background" Value="White" />
+                <Setter Property="BorderBrush" Value="{StaticResource VE.Border}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="PasswordBox">
+                            <Border x:Name="Chrome" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10">
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="Chrome" Property="BorderBrush" Value="{StaticResource VE.Primary}" />
+                                    <Setter TargetName="Chrome" Property="BorderThickness" Value="1.5" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="LinkButton" TargetType="Button">
+                <Setter Property="Foreground" Value="{StaticResource VE.Primary}" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <TextBlock x:Name="T" Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" FontSize="{TemplateBinding FontSize}" FontWeight="SemiBold" />
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T" Property="TextDecorations" Value="Underline" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="SocialButton" TargetType="Button" BasedOn="{StaticResource VE.SecondaryButton}">
+                <Setter Property="MinHeight" Value="44" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource VE.Page}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.9*" />
+            <ColumnDefinition Width="1.1*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Brand panel -->
+        <Border Grid.Column="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#5A4CFA" Offset="0" />
+                    <GradientStop Color="#7B5CFF" Offset="0.55" />
+                    <GradientStop Color="#A06BFF" Offset="1" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid Margin="56,48">
+                <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
+                    <Border Width="44" Height="44" CornerRadius="12" Background="White">
+                        <Border Width="16" Height="16" BorderBrush="#5A4CFA" BorderThickness="2.4" CornerRadius="2"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Border.RenderTransform><RotateTransform Angle="45" CenterX="8" CenterY="8" /></Border.RenderTransform>
+                        </Border>
+                    </Border>
+                    <TextBlock Text="Media Studio" Foreground="White" FontSize="24" FontWeight="Bold" VerticalAlignment="Center" Margin="14,0,0,0" />
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" MaxWidth="460" HorizontalAlignment="Left">
+                    <TextBlock Text="Biến ảnh và video của bạn thành câu chuyện trong vài phút." Foreground="White"
+                               FontSize="34" FontWeight="Bold" TextWrapping="Wrap" LineHeight="44" />
+                    <TextBlock Text="Chọn mẫu, thêm media, chỉnh sửa và xuất video 9:16 sẵn sàng đăng mạng xã hội. Dự án được lưu ngay trên máy của bạn."
+                               Foreground="#E6E2FF" FontSize="16" TextWrapping="Wrap" LineHeight="25" Margin="0,18,0,0" />
+                    <StackPanel Margin="0,28,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <TextBlock Text="&#xE73E;" FontFamily="{StaticResource VE.IconFont}" Foreground="White" FontSize="14" VerticalAlignment="Center" Margin="0,0,12,0" />
+                            <TextBlock Text="Mẫu video và story theo xu hướng" Foreground="White" FontSize="15" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <TextBlock Text="&#xE73E;" FontFamily="{StaticResource VE.IconFont}" Foreground="White" FontSize="14" VerticalAlignment="Center" Margin="0,0,12,0" />
+                            <TextBlock Text="Tự động tách nền và căn chỉnh bằng AI" Foreground="White" FontSize="15" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE73E;" FontFamily="{StaticResource VE.IconFont}" Foreground="White" FontSize="14" VerticalAlignment="Center" Margin="0,0,12,0" />
+                            <TextBlock Text="Dự án lưu trên máy, chỉnh sửa lại bất cứ lúc nào" Foreground="White" FontSize="15" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Form -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
+            <Border Background="White" CornerRadius="20" Padding="40,34" Margin="40" MaxWidth="460" VerticalAlignment="Center"
+                    BorderBrush="{StaticResource VE.Border}" BorderThickness="1">
+                <StackPanel>
+                    <Button Style="{StaticResource LinkButton}" Content="‹ Quay lại đăng nhập" Command="{Binding ShowLoginCommand}" Margin="0,0,0,14"
+                            HorizontalAlignment="Left">
+                        <Button.Visibility>
+                            <MultiBinding Converter="{StaticResource AnyTrue}">
+                                <Binding Path="IsOtpMode" /><Binding Path="IsForgotMode" /><Binding Path="IsResetMode" />
+                            </MultiBinding>
+                        </Button.Visibility>
+                    </Button>
+                    <TextBlock Text="{Binding Heading}" FontSize="28" FontWeight="Bold" Foreground="{StaticResource VE.Text}" />
+                    <TextBlock Text="{Binding SubHeading}" FontSize="14" Foreground="{StaticResource VE.Muted}" TextWrapping="Wrap" Margin="0,6,0,4" />
+
+                    <!-- Messages -->
+                    <Border Background="#FDECEC" CornerRadius="10" Padding="12,9" Margin="0,14,0,0"
+                            Visibility="{Binding HasError, Converter={StaticResource BoolVisibility}}">
+                        <TextBlock Text="{Binding Error}" Foreground="#C0392B" FontSize="13" TextWrapping="Wrap" />
+                    </Border>
+                    <Border Background="{StaticResource VE.PrimaryTint}" CornerRadius="10" Padding="12,9" Margin="0,14,0,0"
+                            Visibility="{Binding HasInfo, Converter={StaticResource BoolVisibility}}">
+                        <TextBlock Text="{Binding Info}" Foreground="{StaticResource VE.Primary}" FontSize="13" TextWrapping="Wrap" />
+                    </Border>
+
+                    <!-- Name (sign-up) -->
+                    <StackPanel Visibility="{Binding IsSignupMode, Converter={StaticResource BoolVisibility}}">
+                        <TextBlock Text="Tên hiển thị" Style="{StaticResource FieldLabel}" />
+                        <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Field}" />
+                    </StackPanel>
+
+                    <!-- Email (all but OTP) -->
+                    <StackPanel>
+                        <StackPanel.Style>
+                            <Style TargetType="StackPanel">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsOtpMode}" Value="True"><Setter Property="Visibility" Value="Collapsed" /></DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Style>
+                        <TextBlock Text="Email" Style="{StaticResource FieldLabel}" />
+                        <TextBox x:Name="EmailBox" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Field}"
+                                 AutomationProperties.Name="Email" />
+                    </StackPanel>
+
+                    <!-- OTP code (verify / reset) -->
+                    <StackPanel>
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource AnyTrue}">
+                                <Binding Path="IsOtpMode" /><Binding Path="IsResetMode" />
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <TextBlock Text="Mã xác nhận (6 số)" Style="{StaticResource FieldLabel}" />
+                        <TextBox Text="{Binding OtpCode, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Field}"
+                                 FontSize="24" FontWeight="SemiBold" TextAlignment="Center" AutomationProperties.Name="Mã OTP" />
+                        <Button Style="{StaticResource LinkButton}" Content="Gửi lại mã" Command="{Binding ResendOtpCommand}"
+                                HorizontalAlignment="Right" Margin="0,8,0,0" />
+                    </StackPanel>
+
+                    <!-- Password -->
+                    <StackPanel>
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource AnyTrue}">
+                                <Binding Path="IsLoginMode" /><Binding Path="IsSignupMode" /><Binding Path="IsResetMode" />
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <TextBlock>
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource FieldLabel}">
+                                    <Setter Property="Text" Value="Mật khẩu" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsResetMode}" Value="True"><Setter Property="Text" Value="Mật khẩu mới" /></DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <PasswordBox x:Name="PasswordInput" Style="{StaticResource PasswordField}" PasswordChanged="OnPasswordChanged"
+                                     AutomationProperties.Name="Mật khẩu" />
+                    </StackPanel>
+                    <StackPanel>
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource AnyTrue}">
+                                <Binding Path="IsSignupMode" /><Binding Path="IsResetMode" />
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <TextBlock Text="Nhập lại mật khẩu" Style="{StaticResource FieldLabel}" />
+                        <PasswordBox x:Name="ConfirmInput" Style="{StaticResource PasswordField}" PasswordChanged="OnConfirmChanged"
+                                     AutomationProperties.Name="Nhập lại mật khẩu" />
+                        <TextBlock Text="Tối thiểu 8 ký tự." FontSize="12" Foreground="{StaticResource VE.Muted}" Margin="0,6,0,0" />
+                    </StackPanel>
+
+                    <Button Style="{StaticResource LinkButton}" Content="Quên mật khẩu?" Command="{Binding ShowForgotCommand}"
+                            HorizontalAlignment="Right" Margin="0,10,0,0"
+                            Visibility="{Binding IsLoginMode, Converter={StaticResource BoolVisibility}}" />
+
+                    <!-- Primary action per mode -->
+                    <Grid Margin="0,20,0,0">
+                        <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="48" Command="{Binding LoginCommand}" IsDefault="{Binding IsLoginMode}"
+                                Visibility="{Binding IsLoginMode, Converter={StaticResource BoolVisibility}}" AutomationProperties.AutomationId="AuthLogin">
+                            <TextBlock Text="Đăng nhập" FontSize="16" />
+                        </Button>
+                        <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="48" Command="{Binding SignupCommand}" IsDefault="{Binding IsSignupMode}"
+                                Visibility="{Binding IsSignupMode, Converter={StaticResource BoolVisibility}}" AutomationProperties.AutomationId="AuthSignup">
+                            <TextBlock Text="Gửi mã xác nhận" FontSize="16" />
+                        </Button>
+                        <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="48" Command="{Binding VerifyOtpCommand}" IsDefault="{Binding IsOtpMode}"
+                                Visibility="{Binding IsOtpMode, Converter={StaticResource BoolVisibility}}" AutomationProperties.AutomationId="AuthVerifyOtp">
+                            <TextBlock Text="Xác nhận và tạo tài khoản" FontSize="16" />
+                        </Button>
+                        <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="48" Command="{Binding ForgotCommand}" IsDefault="{Binding IsForgotMode}"
+                                Visibility="{Binding IsForgotMode, Converter={StaticResource BoolVisibility}}">
+                            <TextBlock Text="Gửi mã đặt lại" FontSize="16" />
+                        </Button>
+                        <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="48" Command="{Binding ResetCommand}" IsDefault="{Binding IsResetMode}"
+                                Visibility="{Binding IsResetMode, Converter={StaticResource BoolVisibility}}">
+                            <TextBlock Text="Đổi mật khẩu" FontSize="16" />
+                        </Button>
+                    </Grid>
+                    <TextBlock Text="Đang xử lý…" FontSize="12" Foreground="{StaticResource VE.Muted}" HorizontalAlignment="Center" Margin="0,8,0,0"
+                               Visibility="{Binding IsBusy, Converter={StaticResource BoolVisibility}}" />
+
+                    <!-- Social sign-in (login / sign-up) -->
+                    <StackPanel Margin="0,18,0,0">
+                        <StackPanel.Visibility>
+                            <MultiBinding Converter="{StaticResource AnyTrue}">
+                                <Binding Path="IsLoginMode" /><Binding Path="IsSignupMode" />
+                            </MultiBinding>
+                        </StackPanel.Visibility>
+                        <Grid Margin="0,0,0,14">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                            <Border Height="1" Background="{StaticResource VE.Border}" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="hoặc tiếp tục với" FontSize="12" Foreground="{StaticResource VE.Muted}" Margin="12,0" />
+                            <Border Grid.Column="2" Height="1" Background="{StaticResource VE.Border}" VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="12" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                            <Button Style="{StaticResource SocialButton}" Command="{Binding GoogleCommand}" AutomationProperties.AutomationId="AuthGoogle">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="G" FontSize="17" FontWeight="Bold" Foreground="#4285F4" VerticalAlignment="Center" Margin="0,0,10,0" />
+                                    <TextBlock Text="Google" FontSize="15" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="2" Style="{StaticResource SocialButton}" Command="{Binding FacebookCommand}" AutomationProperties.AutomationId="AuthFacebook">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="f" FontSize="19" FontWeight="Bold" Foreground="#1877F2" VerticalAlignment="Center" Margin="0,0,10,0" />
+                                    <TextBlock Text="Facebook" FontSize="15" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+
+                    <!-- Switch login / sign-up -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,22,0,0"
+                                Visibility="{Binding IsLoginMode, Converter={StaticResource BoolVisibility}}">
+                        <TextBlock Text="Chưa có tài khoản? " FontSize="13" Foreground="{StaticResource VE.Muted}" />
+                        <Button Style="{StaticResource LinkButton}" Content="Đăng ký bằng Gmail" Command="{Binding ShowSignupCommand}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,22,0,0"
+                                Visibility="{Binding IsSignupMode, Converter={StaticResource BoolVisibility}}">
+                        <TextBlock Text="Đã có tài khoản? " FontSize="13" Foreground="{StaticResource VE.Muted}" />
+                        <Button Style="{StaticResource LinkButton}" Content="Đăng nhập" Command="{Binding ShowLoginCommand}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

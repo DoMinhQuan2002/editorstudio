@@ -1,0 +1,45 @@
+<UserControl x:Class="MediaStudio.Desktop.Views.LandscapeArtwork"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="720" Height="404" ClipToBounds="True">
+    <Canvas Width="720" Height="404" ClipToBounds="True">
+        <Rectangle Width="720" Height="404">
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                    <GradientStop Color="#B9D8E7" Offset="0" />
+                    <GradientStop Color="#E7E6D7" Offset="0.55" />
+                    <GradientStop Color="#6B9B9B" Offset="1" />
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <Ellipse Canvas.Left="520" Canvas.Top="43" Width="62" Height="62" Fill="#F8E3AF" Opacity="0.92" />
+        <Path Data="M0,235 L98,113 L164,187 L250,67 L357,210 L430,118 L560,224 L637,139 L720,220 L720,404 L0,404 Z"
+              Fill="#7A9290" />
+        <Path Data="M78,144 L98,113 L128,148 L111,141 L98,130 L90,145 Z M218,108 L250,67 L290,122 L266,109 L249,83 L237,111 Z M397,153 L430,118 L464,146 L444,139 L430,130 L420,148 Z M608,172 L637,139 L668,175 L648,163 L636,150 L625,169 Z"
+              Fill="#EDF0EA" Opacity="0.95" />
+        <Path Data="M0,261 L117,179 L184,238 L314,129 L411,247 L523,164 L636,250 L720,192 L720,404 L0,404 Z"
+              Fill="#476E69" />
+        <Path Data="M0,278 C100,253 164,263 242,252 C348,236 420,266 523,245 C602,228 665,238 720,220 L720,404 L0,404 Z"
+              Fill="#315C5B" />
+        <Path Data="M0,292 C105,277 173,282 270,266 C359,251 442,274 530,256 C603,241 665,250 720,234 L720,404 L0,404 Z">
+            <Path.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#477A79" Offset="0" />
+                    <GradientStop Color="#9DB9AC" Offset="1" />
+                </LinearGradientBrush>
+            </Path.Fill>
+        </Path>
+        <Path Data="M15,324 C115,301 184,313 265,292 C345,272 430,300 507,280 C590,261 660,273 714,256"
+              Stroke="#D4D7C7" StrokeThickness="3" Opacity="0.42" />
+        <Path Data="M61,348 C157,331 210,340 292,322 C381,301 445,325 532,303 C590,288 647,298 698,281"
+              Stroke="#E5DFC8" StrokeThickness="2" Opacity="0.32" />
+        <Path Data="M0,255 C56,241 102,242 154,250 L179,262 L0,278 Z" Fill="#203F3D" />
+        <Path Data="M32,242 L46,231 L130,231 L150,245 L150,259 L31,259 Z" Fill="#765D4D" />
+        <Rectangle Canvas.Left="28" Canvas.Top="257" Width="127" Height="7" Fill="#D0A77F" />
+        <Rectangle Canvas.Left="43" Canvas.Top="238" Width="5" Height="18" Fill="#E4C69E" />
+        <Rectangle Canvas.Left="76" Canvas.Top="236" Width="5" Height="20" Fill="#E4C69E" />
+        <Rectangle Canvas.Left="112" Canvas.Top="237" Width="5" Height="19" Fill="#E4C69E" />
+        <Path Data="M48,264 L39,302 M76,264 L69,311 M112,264 L108,306 M144,264 L153,292"
+              Stroke="#345C58" StrokeThickness="4" Opacity="0.7" />
+    </Canvas>
+</UserControl>

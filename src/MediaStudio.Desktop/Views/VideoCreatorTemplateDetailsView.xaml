@@ -1,0 +1,269 @@
+<UserControl x:Class="MediaStudio.Desktop.Views.VideoCreatorTemplateDetailsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:MediaStudio.Desktop.ViewModels"
+             xmlns:views="clr-namespace:MediaStudio.Desktop.Views"
+             AutomationProperties.AutomationId="VideoTemplateDetails">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MediaStudio.Desktop;component/Themes/VideoEditorImplicit.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <views:LocalPosterImageConverter x:Key="LocalPosterImageConverter" />
+            <BooleanToVisibilityConverter x:Key="BoolVisibility" />
+            <Style x:Key="InfoIcon" TargetType="TextBlock" BasedOn="{StaticResource VE.Icon}">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Foreground" Value="{StaticResource VE.Primary}" />
+            </Style>
+            <Style x:Key="InfoLabel" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="{StaticResource VE.Muted}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="InfoValue" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="{StaticResource VE.Text}" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="{StaticResource VE.Page}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="24,12,24,0">
+            <Button HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource VE.SecondaryButton}"
+                    MinHeight="48" Padding="20,0" Command="{Binding BackCommand}" AutomationProperties.AutomationId="BackToTemplateGallery">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE72B;" FontFamily="{StaticResource VE.IconFont}" FontSize="16" VerticalAlignment="Center" Margin="0,0,12,0" />
+                    <TextBlock Text="Quay lại" FontSize="16" VerticalAlignment="Center" />
+                </StackPanel>
+            </Button>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Ellipse Width="9" Height="9" Fill="{StaticResource VE.Success}" Margin="0,0,10,0" VerticalAlignment="Center" />
+                <TextBlock Text="Metadata từ Template Catalog" FontSize="14" Foreground="{StaticResource VE.Muted}" VerticalAlignment="Center" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" Visibility="{Binding IsError, Converter={StaticResource BoolVisibility}}">
+            <Border Style="{StaticResource VE.Card}" MaxWidth="560" Padding="34" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" Margin="24">
+                <StackPanel>
+                    <Border Width="52" Height="52" CornerRadius="16" Background="{StaticResource VE.PrimaryTint}" HorizontalAlignment="Left">
+                        <TextBlock Text="&#xE783;" Style="{StaticResource VE.Icon}" FontSize="24" Foreground="{StaticResource VE.Primary}" />
+                    </Border>
+                    <TextBlock Text="Không thể mở mẫu" FontSize="22" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" Margin="0,18,0,0" />
+                    <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource VE.PageSubtitle}" FontSize="14" Margin="0,8,0,0" />
+                    <StackPanel Orientation="Horizontal" Margin="0,22,0,0">
+                        <Button Style="{StaticResource VE.SecondaryButton}" Command="{Binding BackCommand}">
+                            <TextBlock Text="Quay lại thư viện mẫu" />
+                        </Button>
+                        <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="40" Margin="10,0,0,0" Command="{Binding RetryCommand}">
+                            <TextBlock Text="Thử lại" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ScrollViewer.Style>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsError}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ScrollViewer.Style>
+            <Grid Margin="24,8,24,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.85*" MinWidth="260" />
+                    <ColumnDefinition Width="1.7*" MinWidth="460" />
+                    <ColumnDefinition Width="0.95*" MinWidth="280" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Poster / demo player -->
+                <Border Grid.Column="0" Style="{StaticResource VE.Card}" Padding="12,12,12,14"
+                        HorizontalAlignment="Stretch" VerticalAlignment="Top" MaxWidth="360">
+                    <StackPanel>
+                        <Border CornerRadius="10" ClipToBounds="True">
+                            <views:PortraitAspectFrame MaxWidth="336" HorizontalAlignment="Center">
+                                <views:TemplatePreviewControl />
+                            </views:PortraitAspectFrame>
+                        </Border>
+                        <TextBlock Text="{Binding PreviewMessage}" FontSize="14" Foreground="{StaticResource VE.Muted}"
+                                   TextWrapping="Wrap" Margin="4,12,4,0" />
+                    </StackPanel>
+                </Border>
+
+                <!-- Template information -->
+                <StackPanel Grid.Column="1" Margin="16,0,16,0">
+                    <Border Style="{StaticResource VE.Card}" Padding="22,16,22,18">
+                        <StackPanel>
+                            <WrapPanel>
+                                <TextBlock Text="{Binding Name}" FontSize="32" FontWeight="Bold" Foreground="{StaticResource VE.Text}"
+                                           MaxWidth="520" TextWrapping="Wrap" AutomationProperties.AutomationId="TemplateName" />
+                                <Border Background="{StaticResource VE.PrimaryTint}" CornerRadius="14" Padding="12,4"
+                                        Margin="16,8,0,0" VerticalAlignment="Top"
+                                        Visibility="{Binding HasCategory, Converter={StaticResource BoolVisibility}}">
+                                    <TextBlock Text="{Binding Category}" FontSize="14" FontWeight="Medium" Foreground="{StaticResource VE.Primary}" />
+                                </Border>
+                            </WrapPanel>
+                            <WrapPanel Margin="0,12,0,0">
+                                <Border Style="{StaticResource VE.InfoChip}" Margin="0,0,10,8" Padding="12,7">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE823;" Style="{StaticResource VE.Icon}" FontSize="14" Foreground="{StaticResource VE.TextSecondary}" Margin="0,0,9,0" />
+                                        <TextBlock Text="{Binding DurationText}" FontSize="14" Foreground="{StaticResource VE.Text}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource VE.InfoChip}" Margin="0,0,10,8" Padding="12,7">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xEB9F;" Style="{StaticResource VE.Icon}" FontSize="14" Foreground="{StaticResource VE.TextSecondary}" Margin="0,0,9,0" />
+                                        <TextBlock Text="{Binding RequiredMediaSlotsText}" FontSize="14" Foreground="{StaticResource VE.Text}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource VE.InfoChip}" Margin="0,0,10,8" Padding="12,7">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE7F4;" Style="{StaticResource VE.Icon}" FontSize="14" Foreground="{StaticResource VE.TextSecondary}" Margin="0,0,9,0" />
+                                        <TextBlock Text="{Binding AspectRatioText}" FontSize="14" Foreground="{StaticResource VE.Text}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Style="{StaticResource VE.InfoChip}" Margin="0,0,10,8" Padding="12,7"
+                                        Visibility="{Binding HasResolution, Converter={StaticResource BoolVisibility}}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xE7F8;" Style="{StaticResource VE.Icon}" FontSize="14" Foreground="{StaticResource VE.TextSecondary}" Margin="0,0,9,0" />
+                                        <TextBlock Text="{Binding ResolutionText}" FontSize="14" Foreground="{StaticResource VE.Text}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </WrapPanel>
+                            <TextBlock Text="{Binding Description}" FontSize="14" Foreground="{StaticResource VE.Muted}" LineHeight="22"
+                                       TextWrapping="Wrap" Margin="0,4,0,0" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource VE.Card}" Padding="22,16,22,18" Margin="0,14,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Cấu trúc các phân đoạn" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" />
+                            <TextBlock Text="{Binding SceneStructureMessage}" FontSize="13" Foreground="{StaticResource VE.Muted}"
+                                       TextWrapping="Wrap" Margin="0,4,0,12" />
+                            <ItemsControl ItemsSource="{Binding Scenes}" Visibility="{Binding HasScenes, Converter={StaticResource BoolVisibility}}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate><UniformGrid Rows="1" /></ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type vm:VideoTemplateSceneOverviewViewModel}">
+                                        <Border Margin="0,0,10,0" Padding="14,12"
+                                                Background="White" BorderBrush="{StaticResource VE.Border}" BorderThickness="1" CornerRadius="12">
+                                            <StackPanel>
+                                                <Border Width="36" Height="36" CornerRadius="18" Background="{StaticResource VE.PrimaryTint}"
+                                                        HorizontalAlignment="Left">
+                                                    <TextBlock Text="{Binding Index}" FontSize="17" FontWeight="SemiBold"
+                                                               Foreground="{StaticResource VE.Primary}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                </Border>
+                                                <TextBlock Text="{Binding Name}" FontSize="15" FontWeight="SemiBold"
+                                                           Foreground="{StaticResource VE.Text}" TextTrimming="CharacterEllipsis" Margin="0,10,0,0" />
+                                                <TextBlock Text="{Binding DurationText}" FontSize="13" Foreground="{StaticResource VE.Muted}"
+                                                           TextTrimming="CharacterEllipsis" Margin="0,4,0,0" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource VE.Card}" Padding="22,16,22,18" Margin="0,14,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                            <StackPanel>
+                                <TextBlock Text="Thông tin mẫu" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" />
+                                <Grid Margin="0,12,0,0">
+                                    <Grid.ColumnDefinitions><ColumnDefinition Width="32" /><ColumnDefinition Width="112" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions><RowDefinition Height="32" /><RowDefinition Height="32" /><RowDefinition Height="32" /><RowDefinition Height="34" /></Grid.RowDefinitions>
+                                    <TextBlock Text="&#xE823;" Style="{StaticResource InfoIcon}" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Column="1" Text="Thời lượng" Style="{StaticResource InfoLabel}" />
+                                    <TextBlock Grid.Column="2" Text="{Binding DurationText}" Style="{StaticResource InfoValue}" />
+                                    <TextBlock Grid.Row="1" Text="&#xE7F4;" Style="{StaticResource InfoIcon}" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="Khung hình" Style="{StaticResource InfoLabel}" />
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding AspectRatioText}" Style="{StaticResource InfoValue}" />
+                                    <TextBlock Grid.Row="2" Text="&#xE7F8;" Style="{StaticResource InfoIcon}" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="Độ phân giải" Style="{StaticResource InfoLabel}" />
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding ResolutionOrUnavailableText}" Style="{StaticResource InfoValue}" />
+                                    <TextBlock Grid.Row="3" Text="&#xE81E;" Style="{StaticResource InfoIcon}" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="Danh mục" Style="{StaticResource InfoLabel}" />
+                                    <Border Grid.Row="3" Grid.Column="2" Background="{StaticResource VE.PrimaryTint}" CornerRadius="12" Padding="10,3"
+                                            HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding CategoryOrUnavailableText}" FontSize="13" FontWeight="Medium" Foreground="{StaticResource VE.Primary}" />
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                            <Border Grid.Column="1" Width="1" Background="{StaticResource VE.Border}" Margin="22,4" />
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Yêu cầu media" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" />
+                                <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                                    <Border Width="34" Height="34" CornerRadius="9" Background="{StaticResource VE.PrimaryTint}">
+                                        <TextBlock Text="&#xEB9F;" Style="{StaticResource VE.Icon}" FontSize="15" Foreground="{StaticResource VE.Primary}" />
+                                    </Border>
+                                    <TextBlock Text="{Binding RequiredMediaSlotsText}" FontSize="14" FontWeight="SemiBold"
+                                               Foreground="{StaticResource VE.Text}" VerticalAlignment="Center" Margin="12,0,0,0" />
+                                </StackPanel>
+                                <Border Height="1" Background="{StaticResource VE.Border}" Margin="0,12,0,10" />
+                                <TextBlock Text="Định dạng: Ảnh/Video" FontSize="13" Foreground="{StaticResource VE.Muted}" />
+                                <TextBlock Text="{Binding MediaRulesMessage}" FontSize="12" Foreground="{StaticResource VE.Muted}"
+                                           LineHeight="18" TextWrapping="Wrap" Margin="0,6,0,0" ToolTip="{Binding MediaSlotDetailMessage}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+                <!-- Status and actions -->
+                <StackPanel Grid.Column="2">
+                    <Border Style="{StaticResource VE.Card}" Padding="22,20">
+                        <StackPanel>
+                            <TextBlock Text="Trạng thái mẫu" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" />
+                            <TextBlock Text="{Binding AvailabilityStatusText}" FontSize="15" Foreground="{StaticResource VE.Primary}" Margin="0,4,0,16" />
+                            <Button Style="{StaticResource VE.PrimaryButton}" MinHeight="54" Command="{Binding ChooseMediaCommand}"
+                                    ToolTip="{Binding MediaSelectionUnavailableMessage}"
+                                    AutomationProperties.AutomationId="ChooseTemplateMedia">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Chọn ảnh và video" FontSize="18" VerticalAlignment="Center" />
+                                    <TextBlock Text="&#xE72A;" FontFamily="{StaticResource VE.IconFont}" FontSize="16" VerticalAlignment="Center" Margin="16,2,0,0" />
+                                </StackPanel>
+                            </Button>
+                            <Border Height="1" Background="{StaticResource VE.Border}" Margin="0,22,0,16" />
+                            <TextBlock Text="Chọn media" FontSize="16" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" />
+                            <TextBlock Text="{Binding MediaSelectionUnavailableMessage}"
+                                       FontSize="14" Foreground="{StaticResource VE.Muted}" LineHeight="21" TextWrapping="Wrap" Margin="0,6,0,0" />
+                        </StackPanel>
+                    </Border>
+
+                    <Border Style="{StaticResource VE.Card}" Padding="22,18" Margin="0,14,0,0">
+                        <StackPanel>
+                            <TextBlock Text="Trạng thái preview" FontSize="18" FontWeight="SemiBold" Foreground="{StaticResource VE.Text}" />
+                            <Grid Margin="0,16,0,0">
+                                <Grid.ColumnDefinitions><ColumnDefinition Width="72" /><ColumnDefinition Width="16" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                                <Border Width="72" Height="76" CornerRadius="10" Background="#EEEFF5" ClipToBounds="True">
+                                    <Border CornerRadius="10">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding PosterPath, Converter={StaticResource LocalPosterImageConverter}}" Stretch="UniformToFill" />
+                                        </Border.Background>
+                                    </Border>
+                                </Border>
+                                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                    <TextBlock Text="{Binding PreviewStatus}" FontSize="17" FontWeight="SemiBold" Foreground="{StaticResource VE.Primary}" />
+                                    <TextBlock Text="{Binding PreviewMessage}" FontSize="14" Foreground="{StaticResource VE.Muted}"
+                                               TextWrapping="Wrap" Margin="0,5,0,0" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

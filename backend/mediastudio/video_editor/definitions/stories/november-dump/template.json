@@ -1,0 +1,282 @@
+{
+  "templateId": "november-dump",
+  "version": "1.0.0",
+  "name": "November Dump",
+  "description": "Story ảnh 7 trang (13 ảnh) phong cách photo dump mùa thu: bìa ghép 4 ảnh với chữ November, sau đó các trang 1 ảnh và 2 ảnh xen kẽ kèm chú thích.",
+  "outputKind": "image-set",
+  "canvas": {
+    "width": 1080,
+    "height": 1920,
+    "background": "#110E12"
+  },
+  "page": {
+    "width": 1080,
+    "height": 1350
+  },
+  "fonts": {
+    "caption": "assets/InterDisplay-SemiBold.ttf"
+  },
+  "captionStyle": {
+    "font": "caption",
+    "fontSize": 40,
+    "lineHeight": 45,
+    "color": "#F5E6DC",
+    "emojiScale": 1.0,
+    "emojiGap": 10,
+    "shadow": {
+      "color": "#000000",
+      "opacity": 0.35,
+      "blur": 4,
+      "x": 0,
+      "y": 1
+    }
+  },
+  "pages": [
+    {
+      "cells": [
+        {
+          "rect": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "rect": [
+            0.5,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0.5,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "rect": [
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ]
+        }
+      ],
+      "stickers": [
+        {
+          "asset": "assets/november_title.png",
+          "center": [
+            0.523,
+            0.517
+          ],
+          "height": 0.289
+        }
+      ]
+    },
+    {
+      "cells": [
+        {
+          "rect": [
+            0,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0.5,
+            1,
+            0.5
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "center": [
+            0.631,
+            0.783
+          ],
+          "lines": [
+            "my new cozy",
+            [
+              "neighborhood café",
+              {
+                "emoji": "assets/emoji/2615.png"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "cells": [
+        {
+          "rect": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "center": [
+            0.276,
+            0.648
+          ],
+          "lines": [
+            "perfect coat for cozy",
+            [
+              "walks",
+              {
+                "emoji": "assets/emoji/1f90e.png"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "cells": [
+        {
+          "rect": [
+            0,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0.5,
+            1,
+            0.5
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "center": [
+            0.682,
+            0.75
+          ],
+          "lines": [
+            [
+              "fall content days",
+              {
+                "emoji": "assets/emoji/1f342.png"
+              },
+              {
+                "emoji": "assets/emoji/1f4f8.png"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "cells": [
+        {
+          "rect": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "center": [
+            0.696,
+            0.3
+          ],
+          "lines": [
+            "my newest brown",
+            [
+              "babies",
+              {
+                "emoji": "assets/emoji/1f43b.png"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "cells": [
+        {
+          "rect": [
+            0,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "rect": [
+            0,
+            0.5,
+            1,
+            0.5
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "center": [
+            0.689,
+            0.259
+          ],
+          "lines": [
+            "lovely days with the",
+            [
+              "people I love",
+              {
+                "emoji": "assets/emoji/1f495.png"
+              }
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "cells": [
+        {
+          "rect": [
+            0,
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "captions": [
+        {
+          "center": [
+            0.251,
+            0.687
+          ],
+          "lines": [
+            "the ultimate fall",
+            [
+              "candle",
+              {
+                "emoji": "assets/emoji/1f56f.png"
+              }
+            ]
+          ]
+        }
+      ]
+    }
+  ]
+}

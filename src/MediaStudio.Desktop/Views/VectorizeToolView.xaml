@@ -1,0 +1,283 @@
+<UserControl x:Class="MediaStudio.Desktop.Views.VectorizeToolView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:MediaStudio.Desktop.Views"
+             MinHeight="538">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.55*" />
+            <ColumnDefinition Width="16" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Style="{StaticResource CardBorderStyle}" ClipToBounds="True">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="62" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Margin="18,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="▧" FontSize="18" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" />
+                        <StackPanel Margin="9,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding InputFileName}" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" />
+                            <TextBlock Text="{Binding InputDimensions}" Style="{StaticResource SmallTextStyle}" Margin="0,2,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Style="{StaticResource SecondaryButtonStyle}" Command="{Binding ReturnToSingleCommand}"
+                                Visibility="{Binding IsCompareMode, Converter={StaticResource BooleanToVisibilityConverter}}" Margin="0,0,8,0">
+                            <StackPanel Orientation="Horizontal"><TextBlock Text="←" Margin="0,0,6,0" /><TextBlock Text="Một phương pháp" /></StackPanel>
+                        </Button>
+                        <Button Style="{StaticResource SecondaryButtonStyle}" Command="{Binding OpenImageCommand}">
+                            <StackPanel Orientation="Horizontal"><TextBlock Text="▱" FontSize="16" Margin="0,0,7,0" /><TextBlock Text="Đổi ảnh" /></StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Border Grid.Row="1" Background="{StaticResource CanvasBrush}" Padding="12">
+                    <Grid>
+                        <!-- Single-engine preview keeps the existing two-pane workspace. -->
+                        <Grid Visibility="{Binding IsSingleMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="12" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Background="{Binding PreviewBackgroundBrush}" CornerRadius="8" ClipToBounds="True">
+                                <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="32" /><RowDefinition Height="*" /><RowDefinition Height="30" /></Grid.RowDefinitions>
+                                    <Grid Margin="11,0">
+                                        <TextBlock Text="{Binding SourcePreviewTitle}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" VerticalAlignment="Center" />
+                                        <TextBlock Text="RASTER" FontSize="9" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <Grid Grid.Row="1" Background="{Binding PreviewBackgroundBrush}">
+                                        <Viewbox Stretch="Uniform" Margin="14" Visibility="{Binding ShowSampleArt, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <views:FlowerArtwork />
+                                        </Viewbox>
+                                        <views:ZoomPanImage Source="{Binding VectorSourcePreviewImage}" Zoom="{Binding ZoomFactor, Mode=TwoWay}"
+                                                            PanX="{Binding PanX, Mode=TwoWay}" PanY="{Binding PanY, Mode=TwoWay}"
+                                                            PreviewBackground="{Binding PreviewBackgroundBrush}"
+                                                            Visibility="{Binding HasImportedImage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="11,0">
+                                        <TextBlock Text="{Binding PixelDimensions}" FontSize="9" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" />
+                                        <TextBlock Text="{Binding ForegroundAlphaStatusText}" FontSize="9" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" ToolTip="{Binding ForegroundAlphaStatusText}" />
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                            <Border Grid.Column="2" Background="{Binding PreviewBackgroundBrush}" CornerRadius="8" ClipToBounds="True">
+                                <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="32" /><RowDefinition Height="*" /><RowDefinition Height="30" /></Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Background="#F0EFFF" Padding="11,0">
+                                        <Grid>
+                                            <TextBlock Text="{Binding SelectedMethodTitle}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" VerticalAlignment="Center" />
+                                            <TextBlock Text="SVG" FontSize="9" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Border>
+                                    <Grid Grid.Row="1" Background="{Binding PreviewBackgroundBrush}">
+                                        <views:ZoomPanImage Source="{Binding SelectedResultPreviewImage}" Zoom="{Binding ZoomFactor, Mode=TwoWay}"
+                                                            PanX="{Binding PanX, Mode=TwoWay}" PanY="{Binding PanY, Mode=TwoWay}"
+                                                            PreviewBackground="{Binding PreviewBackgroundBrush}"
+                                                            Visibility="{Binding ShowSingleResultPreview, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="250"
+                                                    Visibility="{Binding ShowSingleResultPlaceholder, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                            <TextBlock Text="◇" FontSize="28" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Center" />
+                                            <TextBlock Text="{Binding SelectedResultSummary}" TextWrapping="Wrap" TextAlignment="Center" FontSize="11"
+                                                       Foreground="{StaticResource MutedBrush}" Margin="0,8,0,0" />
+                                            <TextBlock Text="Kết quả sẽ hiển thị sau khi xử lý" TextWrapping="Wrap" TextAlignment="Center" FontSize="10"
+                                                       Foreground="{StaticResource MutedBrush}" Margin="0,5,0,0" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="11,0" Background="#FAFAFC">
+                                        <TextBlock Text="{Binding SelectedResultSummary}" FontSize="9" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" />
+                                        <TextBlock Text="Nền preview đồng nhất" FontSize="9" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <!-- Compare uses one source bitmap and two viewport-sized SVG previews. -->
+                        <Grid Visibility="{Binding IsCompareMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="10" /><ColumnDefinition Width="*" /><ColumnDefinition Width="10" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" Background="{Binding PreviewBackgroundBrush}" CornerRadius="8" ClipToBounds="True">
+                                <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="38" /><RowDefinition Height="*" /><RowDefinition Height="32" /></Grid.RowDefinitions>
+                                    <Grid Margin="10,0">
+                                        <TextBlock Text="Ảnh gốc" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" VerticalAlignment="Center" />
+                                        <TextBlock Text="SOURCE" FontSize="8" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <Grid Grid.Row="1" Background="{Binding PreviewBackgroundBrush}">
+                                        <views:ZoomPanImage Source="{Binding VectorSourcePreviewImage}" Zoom="{Binding ZoomFactor, Mode=TwoWay}"
+                                                            PanX="{Binding PanX, Mode=TwoWay}" PanY="{Binding PanY, Mode=TwoWay}"
+                                                            PreviewBackground="{Binding PreviewBackgroundBrush}"
+                                                            Visibility="{Binding HasImportedImage, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </Grid>
+                                    <TextBlock Grid.Row="2" Text="{Binding PixelDimensions}" FontSize="9" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" Margin="10,0" />
+                                </Grid>
+                            </Border>
+                            <Border Grid.Column="2" Background="{Binding PreviewBackgroundBrush}" CornerRadius="8" ClipToBounds="True">
+                                <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="38" /><RowDefinition Height="*" /><RowDefinition Height="44" /></Grid.RowDefinitions>
+                                    <Grid Margin="10,0">
+                                        <TextBlock Text="Smart Reconstruction V2" FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" VerticalAlignment="Center" />
+                                        <TextBlock Text="SVG" FontSize="8" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <Grid Grid.Row="1" Background="{Binding PreviewBackgroundBrush}">
+                                        <views:ZoomPanImage Source="{Binding SmartPreviewImage}" Zoom="{Binding ZoomFactor, Mode=TwoWay}"
+                                                            PanX="{Binding PanX, Mode=TwoWay}" PanY="{Binding PanY, Mode=TwoWay}"
+                                                            PreviewBackground="{Binding PreviewBackgroundBrush}"
+                                                            Visibility="{Binding SmartHasPreview, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <TextBlock Text="{Binding SmartStateText}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" Margin="14" FontSize="10" Foreground="{StaticResource MutedBrush}"
+                                                   Visibility="{Binding SmartHasNoPreview, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="8,2">
+                                        <Grid.RowDefinitions><RowDefinition Height="18" /><RowDefinition Height="24" /></Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding SmartStateText}" FontSize="8" Foreground="{StaticResource MutedBrush}" TextTrimming="CharacterEllipsis" ToolTip="{Binding SmartStateText}" />
+                                        <Button Grid.Row="1" Style="{StaticResource SecondaryButtonStyle}" Padding="5,2" FontSize="9"
+                                                Command="{Binding SaveSmartResultCommand}" IsEnabled="{Binding SmartHasResult}">Lưu Smart SVG</Button>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                            <Border Grid.Column="4" Background="{Binding PreviewBackgroundBrush}" CornerRadius="8" ClipToBounds="True">
+                                <Grid>
+                                    <Grid.RowDefinitions><RowDefinition Height="38" /><RowDefinition Height="*" /><RowDefinition Height="44" /></Grid.RowDefinitions>
+                                    <Grid Margin="10,0">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <TextBlock Text="Contour Preserving" FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" />
+                                            <Border Background="{StaticResource PrimaryTintBrush}" CornerRadius="5" Padding="4,1" Margin="5,0,0,0">
+                                                <TextBlock Text="EXPERIMENTAL" FontSize="7" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" />
+                                            </Border>
+                                        </StackPanel>
+                                        <TextBlock Text="SVG" FontSize="8" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                                    </Grid>
+                                    <Grid Grid.Row="1" Background="{Binding PreviewBackgroundBrush}">
+                                        <views:ZoomPanImage Source="{Binding ContourPreviewImage}" Zoom="{Binding ZoomFactor, Mode=TwoWay}"
+                                                            PanX="{Binding PanX, Mode=TwoWay}" PanY="{Binding PanY, Mode=TwoWay}"
+                                                            PreviewBackground="{Binding PreviewBackgroundBrush}"
+                                                            Visibility="{Binding ContourHasPreview, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <TextBlock Text="{Binding ContourStateText}" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center" Margin="14" FontSize="10" Foreground="{StaticResource MutedBrush}"
+                                                   Visibility="{Binding ContourHasNoPreview, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="8,2">
+                                        <Grid.RowDefinitions><RowDefinition Height="18" /><RowDefinition Height="24" /></Grid.RowDefinitions>
+                                        <TextBlock Text="{Binding ContourStateText}" FontSize="8" Foreground="{StaticResource MutedBrush}" TextTrimming="CharacterEllipsis" ToolTip="{Binding ContourStateText}" />
+                                        <Button Grid.Row="1" Style="{StaticResource SecondaryButtonStyle}" Padding="5,2" FontSize="9"
+                                                Command="{Binding SaveContourResultCommand}" IsEnabled="{Binding ContourHasResult}">Lưu Contour SVG</Button>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </Border>
+
+                <Grid Grid.Row="2" Margin="18,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="◫" FontSize="17" Foreground="{StaticResource PrimaryBrush}" VerticalAlignment="Center" />
+                        <TextBlock Text="{Binding WorkspaceCaption}" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextBrush}" Margin="7,0,0,0" VerticalAlignment="Center" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <TextBlock Text="Đồng bộ zoom/pan" FontSize="9" Foreground="{StaticResource MutedBrush}" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <Button Style="{StaticResource IconButtonStyle}" Width="28" Height="28" Command="{Binding SetZoomCommand}" CommandParameter="out">−</Button>
+                        <TextBlock Text="{Binding ZoomLabel}" FontSize="10" Foreground="{StaticResource TextBrush}" VerticalAlignment="Center" Margin="7,0" />
+                        <Button Style="{StaticResource IconButtonStyle}" Width="28" Height="28" Command="{Binding SetZoomCommand}" CommandParameter="in">+</Button>
+                        <Button Style="{StaticResource SecondaryButtonStyle}" Padding="7,5" Margin="7,0,0,0" FontSize="9"
+                                Command="{Binding SetZoomCommand}" CommandParameter="100">100%</Button>
+                        <Button Style="{StaticResource SecondaryButtonStyle}" Padding="7,5" Margin="7,0,0,0" FontSize="9"
+                                Command="{Binding SetZoomCommand}" CommandParameter="fit">Vừa khung</Button>
+                        <ComboBox Width="106" Height="28" Margin="8,0,0,0" SelectedValue="{Binding PreviewBackground}" SelectedValuePath="Tag"
+                                  ToolTip="Cùng một nền preview cho ảnh gốc và cả hai SVG">
+                            <ComboBoxItem Content="Ô caro" Tag="checkerboard" />
+                            <ComboBoxItem Content="Trắng" Tag="white" />
+                            <ComboBoxItem Content="Đen" Tag="black" />
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="2" Style="{StaticResource CardBorderStyle}" Padding="16">
+            <Grid>
+                <Grid.RowDefinitions><RowDefinition Height="24" /><RowDefinition Height="10" /><RowDefinition Height="*" /><RowDefinition Height="10" /><RowDefinition Height="78" /><RowDefinition Height="5" /><RowDefinition Height="34" /></Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <TextBlock Text="Chuyển sang vector" Style="{StaticResource SectionTitleStyle}" VerticalAlignment="Center" />
+                    <TextBlock Text="✦" FontSize="15" Foreground="{StaticResource PrimaryBrush}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                </Grid>
+                <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="0,0,4,6">
+                        <TextBlock Text="Kiểu kết quả" Style="{StaticResource SmallTextStyle}" Margin="2,0,0,6" />
+                        <RadioButton GroupName="VectorOutputMode" IsChecked="{Binding IsCutoutMode, Mode=TwoWay}" IsEnabled="{Binding IsOptionsEnabled}" Margin="2,0,0,6">
+                            <TextBlock Text="Tách logo khỏi nền (giữ nguyên ảnh gốc)" FontSize="11" Foreground="{StaticResource TextBrush}" />
+                        </RadioButton>
+                        <RadioButton GroupName="VectorOutputMode" IsChecked="{Binding IsVectorMode, Mode=TwoWay}" IsEnabled="{Binding IsOptionsEnabled}" Margin="2,0,0,12">
+                            <TextBlock Text="Vẽ lại thành vector" FontSize="11" Foreground="{StaticResource TextBrush}" />
+                        </RadioButton>
+                        <Border Background="{StaticResource PrimaryTintBrush}" CornerRadius="9" Padding="12">
+                            <StackPanel>
+                                <TextBlock Text="{Binding SelectedMethodTitle}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" />
+                                <TextBlock Text="{Binding SelectedMethodDescription}" TextWrapping="Wrap" FontSize="9" Foreground="{StaticResource MutedBrush}" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </Border>
+
+                        <StackPanel Visibility="{Binding IsVectorMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid Margin="2,16,0,0">
+                            <TextBlock Text="Số màu" Style="{StaticResource SmallTextStyle}" />
+                            <TextBlock Text="{Binding ColorCount}" FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Slider Margin="0,6,0,0" Minimum="2" Maximum="24" TickFrequency="1" IsSnapToTickEnabled="True"
+                                Value="{Binding ColorCount, Mode=TwoWay}" IsEnabled="{Binding IsOptionsEnabled}" />
+                        <TextBlock Text="Ít màu: gọn, phẳng. Nhiều màu: giữ sắc độ chuyển màu." TextWrapping="Wrap" FontSize="9" Foreground="{StaticResource MutedBrush}" Margin="2,2,0,0" />
+
+                        <Grid Margin="2,14,0,0">
+                            <TextBlock Text="Chi tiết" Style="{StaticResource SmallTextStyle}" />
+                            <TextBlock Text="{Binding Detail}" FontSize="10" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" HorizontalAlignment="Right" />
+                        </Grid>
+                        <Slider Margin="0,6,0,0" Minimum="0" Maximum="100" TickFrequency="5" IsSnapToTickEnabled="True"
+                                Value="{Binding Detail, Mode=TwoWay}" IsEnabled="{Binding IsOptionsEnabled}" />
+                        <TextBlock Text="Thấp: đường cong mượt, ít điểm. Cao: bám sát từng chi tiết nhỏ." TextWrapping="Wrap" FontSize="9" Foreground="{StaticResource MutedBrush}" Margin="2,2,0,0" />
+
+                        <CheckBox Margin="2,16,0,0" IsChecked="{Binding RemoveBackground, Mode=TwoWay}" IsEnabled="{Binding IsOptionsEnabled}">
+                            <TextBlock Text="Tự động xóa nền (nền trong suốt)" FontSize="11" Foreground="{StaticResource TextBrush}" />
+                        </CheckBox>
+                        <TextBlock Text="App tự nhận diện vùng logo và vùng nền, không cần chỉnh tay." TextWrapping="Wrap" FontSize="9" Foreground="{StaticResource MutedBrush}" Margin="22,4,0,0" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <Grid Grid.Row="4" Visibility="{Binding IsSingleMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions><RowDefinition Height="38" /><RowDefinition Height="8" /><RowDefinition Height="32" /></Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="*" /><ColumnDefinition Width="8" /><ColumnDefinition Width="Auto" /></Grid.ColumnDefinitions>
+                        <Button Grid.Column="0" Style="{StaticResource PrimaryButtonStyle}" Command="{Binding RunCommand}">
+                            <StackPanel Orientation="Horizontal"><TextBlock Text="◇" FontSize="15" Margin="0,0,7,0" /><TextBlock Text="{Binding RunButtonLabel}" /></StackPanel>
+                        </Button>
+                        <Button Grid.Column="2" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding SaveResultCommand}"
+                                IsEnabled="{Binding CanSaveSelected}">
+                            <StackPanel Orientation="Horizontal"><TextBlock Text="↓" FontSize="14" Margin="0,0,5,0" /><TextBlock Text="Lưu SVG" /></StackPanel>
+                        </Button>
+                    </Grid>
+                    <Button Grid.Row="2" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding SavePngCommand}"
+                            IsEnabled="{Binding CanSaveSelected}">
+                        <StackPanel Orientation="Horizontal"><TextBlock Text="↓" FontSize="14" Margin="0,0,5,0" /><TextBlock Text="Lưu PNG nền trong suốt" /></StackPanel>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="4" Visibility="{Binding IsCompareMode, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions><RowDefinition Height="38" /><RowDefinition Height="8" /><RowDefinition Height="32" /></Grid.RowDefinitions>
+                    <Button Style="{StaticResource PrimaryButtonStyle}" Command="{Binding CompareCommand}"
+                            IsEnabled="{Binding IsOptionsEnabled}">
+                        <StackPanel Orientation="Horizontal"><TextBlock Text="◫" Margin="0,0,7,0" /><TextBlock Text="Chạy lại so sánh" /></StackPanel>
+                    </Button>
+                    <Button Grid.Row="2" Style="{StaticResource SecondaryButtonStyle}" Command="{Binding SaveBothCommand}"
+                            IsEnabled="{Binding IsOptionsEnabled}">Lưu cả hai SVG</Button>
+                </Grid>
+                <ProgressBar Grid.Row="5" Height="3" Minimum="0" Maximum="100" Value="{Binding SingleProgress, Mode=OneWay}"
+                             Visibility="{Binding IsProcessing, Converter={StaticResource BooleanToVisibilityConverter}}"
+                             Foreground="{StaticResource PrimaryBrush}" Background="{StaticResource PrimaryTintBrush}" />
+                <TextBlock Grid.Row="6" Text="{Binding StatusMessage}" ToolTip="{Binding StatusMessage}" FontSize="9"
+                           Foreground="{StaticResource MutedBrush}" TextAlignment="Center" VerticalAlignment="Center"
+                           TextTrimming="CharacterEllipsis" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</UserControl>

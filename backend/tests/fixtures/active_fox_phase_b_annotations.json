@@ -1,0 +1,16 @@
+{
+  "description": "Phase B fixture-only text ROI annotations. Not imported by production processing.",
+  "fixture": "active_fox.jpg",
+  "expected_text": ["ACTIVE FOX", "YOUR TAGLINE"],
+  "regions": [
+    {
+      "id": "title",
+      "bbox_xyxy": [95, 345, 460, 405]
+    },
+    {
+      "id": "tagline",
+      "bbox_xyxy": [185, 400, 368, 440]
+    }
+  ],
+  "fox_roi_xyxy": [140, 110, 410, 340]
+}

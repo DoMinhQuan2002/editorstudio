@@ -1,0 +1,19 @@
+{
+  "description": "Fixture-only Phase C visual landmarks and evaluation ROIs. Production segmentation does not read these labels or coordinates.",
+  "fixture": "active_fox.jpg",
+  "text_rois_xyxy": [
+    [95, 345, 460, 405],
+    [185, 400, 368, 440]
+  ],
+  "feature_points": {
+    "nose": [240, 202],
+    "eye": [300, 187],
+    "cream_region": [315, 227],
+    "yellow_highlight": [260, 132],
+    "tail_tip": [181, 220],
+    "outer_silhouette": [178, 240]
+  },
+  "inner_ear_roi_xyxy": [321, 136, 343, 161],
+  "tail_body_gradient_roi_xyxy": [188, 250, 270, 315],
+  "central_negative_space_points": [[290, 257], [276, 244]]
+}

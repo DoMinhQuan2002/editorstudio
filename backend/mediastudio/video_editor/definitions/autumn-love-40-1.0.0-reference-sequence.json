@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 1,
+  "templateId": "autumn-love-40",
+  "version": "1.0.0-reference-sequence",
+  "name": "Autumn Love · 40 khung",
+  "width": 1080,
+  "height": 1920,
+  "frameRateNumerator": 30,
+  "frameRateDenominator": 1,
+  "durationTicks": 990000,
+  "demoAssetReference": null,
+  "posterAssetReference": null,
+  "audioAssetReference": null,
+  "supportedCapabilities": [
+    "full_frame_image",
+    "hard_cut",
+    "multi_layer_collage",
+    "automatic_foreground_cutout",
+    "preview_export_shared_renderer",
+    "video_backgrounds"
+  ],
+  "metadata": {
+    "selectionPolicy": {
+      "mode": "ordered-40-frame-sequence",
+      "requiredMediaCount": 40,
+      "mediaDurationsMs": [
+        1500,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        1000,
+        900,
+        700,
+        900,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        200,
+        300
+      ],
+      "overlaySlots": [
+        14,
+        16,
+        17,
+        19,
+        23,
+        39
+      ],
+      "caption": "where we fell in love ❤️"
+    },
+    "sourceEvidence": "The 40 media-card labels sum to 12.1s: 34 cards at 0.2s and six longer cards. The reference overlays two 0.9s portraits over the preceding 1.0s and 0.7s backgrounds; those two pairs overlap by 0.5s and 0.6s, giving an 11.0s output. A few additional portraits appear briefly as cut-outs over neighboring scenes."
+  },
+  "slots": [
+    {
+      "slotId": "frame-01",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-02",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-03",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-04",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-05",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-06",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-07",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-08",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-09",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-10",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-11",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-12",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-13",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-14",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-15",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-16",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-17",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-18",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-19",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-20",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-21",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-22",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-23",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-24",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-25",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-26",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-27",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-28",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-29",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-30",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-31",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-32",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-33",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-34",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-35",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-36",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-37",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-38",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-39",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "frame-40",
+      "allowedMediaKinds": [
+        "image",
+        "video"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    }
+  ],
+  "events": [
+    {
+      "eventId": "template-scaffold",
+      "timelineStartTicks": 0,
+      "durationTicks": 990000,
+      "eventClassification": "UNKNOWN",
+      "sourceEvidence": "The selection planner creates the 11-second sequence with two overlapping background/cut-out pairs.",
+      "layers": [
+        {
+          "layerId": "frame-01",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-01",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-02",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-02",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-03",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-03",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-04",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-04",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-05",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-05",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-06",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-06",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-07",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-07",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-08",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-08",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-09",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-09",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-10",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-10",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-11",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-11",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-12",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-12",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-13",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-13",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-14",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-14",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-15",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-15",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-16",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-16",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-17",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-17",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-18",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-18",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-19",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-19",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-20",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-20",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-21",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-21",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-22",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-22",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-23",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-23",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-24",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-24",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-25",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-25",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-26",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-26",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-27",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-27",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-28",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-28",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-29",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-29",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-30",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-30",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-31",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-31",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-32",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-32",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-33",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-33",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-34",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-34",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-35",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-35",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-36",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-36",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-37",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-37",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-38",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-38",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-39",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-39",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "frame-40",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "frame-40",
+          "fitMode": "cover"
+        },
+        {
+          "layerId": "caption-where-we-fell-in-love",
+          "kind": "text",
+          "layerOrder": 10,
+          "text": "where we fell in love ❤️",
+          "textX": 0.5,
+          "textY": 0.56,
+          "fontSize": 42,
+          "color": "#FFFFFF",
+          "fontFamily": "Arial",
+          "opacity": 0.94,
+          "shadowColor": "#000000",
+          "shadowX": 1,
+          "shadowY": 2
+        }
+      ]
+    }
+  ],
+  "assetDependencies": []
+}

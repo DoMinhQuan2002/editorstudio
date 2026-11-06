@@ -1,0 +1,35 @@
+{
+  "manifestVersion": 1,
+  "templateId": "fall-diary",
+  "availabilityStatus": "REFERENCE_ONLY",
+  "referenceKit": {
+    "expectedFileName": "FALL_DIARY_Reference_Kit.zip",
+    "found": false,
+    "sha256ManifestVerified": false,
+    "readmeReviewed": false
+  },
+  "assets": {
+    "demoVideo": {
+      "source": null,
+      "found": false,
+      "usageRights": "unverified"
+    },
+    "poster": {
+      "source": null,
+      "found": false,
+      "usageRights": "unverified"
+    },
+    "audio": {
+      "source": null,
+      "found": false,
+      "usageRights": "unverified"
+    },
+    "privateTestFixtures": {
+      "expectedCount": 12,
+      "foundCount": 0,
+      "publishable": false
+    }
+  },
+  "packagedPersonalAssets": [],
+  "note": "This manifest records the missing inputs; it is not a production asset bundle."
+}

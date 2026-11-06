@@ -1,0 +1,1035 @@
+{
+  "schemaVersion": 1,
+  "templateId": "fall-diary",
+  "version": "0.2.0-motion-pilot",
+  "name": "Fall Diary Motion Pilot",
+  "width": 1080,
+  "height": 1920,
+  "frameRateNumerator": 30,
+  "frameRateDenominator": 1,
+  "durationTicks": 1350000,
+  "demoAssetReference": "local_reference/fall_diary/demo/fall_diary_reference.mp4",
+  "posterAssetReference": null,
+  "audioAssetReference": null,
+  "supportedCapabilities": [
+    "full_frame_image",
+    "hard_cut",
+    "multi_layer_collage",
+    "linear_keyframes_90khz",
+    "dynamic_position_scale_rotation_opacity",
+    "letterbox_text_graphic",
+    "preview_export_shared_renderer"
+  ],
+  "slots": [
+    {
+      "slotId": "photo-01",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-02",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-03",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-04",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-05",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-06",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-07",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-08",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-09",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-10",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-11",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-12",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    }
+  ],
+  "events": [
+    {
+      "eventId": "scene-01-open",
+      "timelineStartTicks": 0,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "s01-background",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-01",
+          "fitMode": "cover",
+          "positionX": 0,
+          "positionY": 0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 1.045,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s01-hero-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-02",
+          "fitMode": "contain",
+          "positionX": 0.22,
+          "positionY": 0.18,
+          "scale": 0.52,
+          "rotation": -5,
+          "opacity": 0.72,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": 0.22,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": 0.12,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": 0.18,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": 0.08,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.52,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.6,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "rotation",
+              "timeTicks": 0,
+              "value": -5,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "rotation",
+              "timeTicks": 225000,
+              "value": -2,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 0,
+              "value": 0.72,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 225000,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "eventId": "scene-02-double-card",
+      "timelineStartTicks": 225000,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "s02-background",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-03",
+          "fitMode": "cover",
+          "positionX": 0,
+          "positionY": 0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 1.035,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s02-card-a",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-04",
+          "fitMode": "contain",
+          "positionX": -0.28,
+          "positionY": 0.14,
+          "scale": 0.46,
+          "rotation": -3,
+          "opacity": 1.0,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": -0.28,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": -0.12,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": 0.14,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": 0.04,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.46,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.54,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s02-card-b",
+          "kind": "image",
+          "layerOrder": 2,
+          "slotId": "photo-05",
+          "fitMode": "contain",
+          "positionX": 0.25,
+          "positionY": -0.16,
+          "scale": 0.38,
+          "rotation": 2,
+          "opacity": 0.82,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": 0.25,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": 0.18,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": -0.16,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": -0.02,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.38,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.45,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 0,
+              "value": 0.82,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 225000,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "eventId": "scene-03-offset-stack",
+      "timelineStartTicks": 450000,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "s03-background",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-06",
+          "fitMode": "cover",
+          "positionX": 0,
+          "positionY": 0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "keyframes": []
+        },
+        {
+          "layerId": "s03-main-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-07",
+          "fitMode": "contain",
+          "positionX": 0.02,
+          "positionY": 0.16,
+          "scale": 0.66,
+          "rotation": 0.0,
+          "opacity": 0.95,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": 0.02,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": -0.13,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": 0.16,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": -0.09,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.66,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.48,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s03-detail-card",
+          "kind": "image",
+          "layerOrder": 2,
+          "slotId": "photo-08",
+          "fitMode": "contain",
+          "positionX": -0.28,
+          "positionY": 0.27,
+          "scale": 0.33,
+          "rotation": 0.0,
+          "opacity": 0.8,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": -0.28,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": -0.18,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": 0.27,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": 0.18,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 0,
+              "value": 0.8,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 225000,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "eventId": "scene-04-sweep",
+      "timelineStartTicks": 675000,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "s04-background",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-09",
+          "fitMode": "cover",
+          "positionX": 0,
+          "positionY": 0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.98,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 1.07,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s04-sweeping-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-10",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": -0.18,
+          "scale": 0.45,
+          "rotation": 3,
+          "opacity": 0.94,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": 0.28,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": -0.22,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": -0.18,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": 0.18,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.45,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.64,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "rotation",
+              "timeTicks": 0,
+              "value": 3,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "rotation",
+              "timeTicks": 225000,
+              "value": -2,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "eventId": "scene-05-four-layer-collage",
+      "timelineStartTicks": 900000,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "s05-background",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-11",
+          "fitMode": "cover",
+          "positionX": 0,
+          "positionY": 0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 1.04,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s05-card-left",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-12",
+          "fitMode": "contain",
+          "positionX": -0.3,
+          "positionY": -0.12,
+          "scale": 0.36,
+          "rotation": 0.0,
+          "opacity": 0.9,
+          "keyframes": [
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": -0.12,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": -0.18,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.36,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.42,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s05-card-center",
+          "kind": "image",
+          "layerOrder": 2,
+          "slotId": "photo-01",
+          "fitMode": "contain",
+          "positionX": 0.02,
+          "positionY": 0.08,
+          "scale": 0.54,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": 0.02,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": 0.1,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": 0.08,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": 0.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.54,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.48,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s05-card-right",
+          "kind": "image",
+          "layerOrder": 3,
+          "slotId": "photo-02",
+          "fitMode": "contain",
+          "positionX": 0.3,
+          "positionY": 0.22,
+          "scale": 0.28,
+          "rotation": 0.0,
+          "opacity": 0.82,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": 0.3,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": 0.23,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": 0.22,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": 0.08,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 0,
+              "value": 0.82,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 225000,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "eventId": "scene-06-close",
+      "timelineStartTicks": 1125000,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "s06-background",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-03",
+          "fitMode": "cover",
+          "positionX": 0,
+          "positionY": 0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "keyframes": []
+        },
+        {
+          "layerId": "s06-card-upper",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-05",
+          "fitMode": "contain",
+          "positionX": -0.24,
+          "positionY": -0.2,
+          "scale": 0.43,
+          "rotation": 0.0,
+          "opacity": 0.92,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": -0.24,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": -0.12,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": -0.2,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": -0.1,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.43,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.5,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        },
+        {
+          "layerId": "s06-card-lower",
+          "kind": "image",
+          "layerOrder": 2,
+          "slotId": "photo-09",
+          "fitMode": "contain",
+          "positionX": 0.26,
+          "positionY": 0.22,
+          "scale": 0.4,
+          "rotation": 0.0,
+          "opacity": 0.84,
+          "keyframes": [
+            {
+              "property": "positionX",
+              "timeTicks": 0,
+              "value": 0.26,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionX",
+              "timeTicks": 225000,
+              "value": 0.12,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 0,
+              "value": 0.22,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "positionY",
+              "timeTicks": 225000,
+              "value": 0.12,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 0.4,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 225000,
+              "value": 0.48,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 0,
+              "value": 0.84,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "opacity",
+              "timeTicks": 225000,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "eventId": "title-card",
+      "timelineStartTicks": 0,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "title-fall",
+          "kind": "text",
+          "layerOrder": 4,
+          "text": "FALL",
+          "textX": 0.34,
+          "textY": 0.16,
+          "fontSize": 82,
+          "color": "#17324F",
+          "fontFamily": "Arial",
+          "opacity": 1.0,
+          "textBox": true,
+          "textBoxColor": "#F3D990",
+          "textBoxOpacity": 0.96,
+          "textBoxBorderWidth": 2,
+          "textBoxBorderColor": "#FFF7DF",
+          "shadowColor": "#142133",
+          "shadowX": 3,
+          "shadowY": 5
+        },
+        {
+          "layerId": "title-diary",
+          "kind": "text",
+          "layerOrder": 4,
+          "text": "DIARY",
+          "textX": 0.32,
+          "textY": 0.285,
+          "fontSize": 82,
+          "color": "#17324F",
+          "fontFamily": "Arial",
+          "opacity": 1.0,
+          "textBox": true,
+          "textBoxColor": "#F3D990",
+          "textBoxOpacity": 0.96,
+          "textBoxBorderWidth": 2,
+          "textBoxBorderColor": "#FFF7DF",
+          "shadowColor": "#142133",
+          "shadowX": 3,
+          "shadowY": 5
+        }
+      ]
+    }
+  ],
+  "assetDependencies": []
+}

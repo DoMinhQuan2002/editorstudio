@@ -1,0 +1,61 @@
+# .NET build output
+**/bin/
+**/obj/
+**/TestResults/
+.vs/
+
+# Python environments and caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local account API credentials and database files
+/server/account_api/.env
+/server/account_api/*.db
+/server/account_api/*.db-journal
+
+# Local credentials, databases, and generated logs
+.env
+.env.*
+!.env.example
+**/*.db*
+**/*.sqlite*
+*.log
+/src/MediaStudio.Desktop/account-settings.json
+
+# Local IDE and OS files
+.idea/
+.vscode/
+Thumbs.db
+Desktop.ini
+
+# Local vector comparison renders and stage diagnostics
+/artifacts/
+**/artifacts/
+**/.tmp/
+/tmp/
+/.docx_qa*/
+/_docx_qa*/
+/.video_editor_docx_qa*/
+
+# Generated QA outputs and CMake/vcpkg build tree
+/backend/artifacts/
+/backend/native/video_engine/build*/
+**/._build*/
+
+# Fashion Studio model weights and reference sources (large, downloaded by download-qwen-model.bat)
+/models/
+/third_party/
+fashion-setup-log.txt
+build-log.txt
+
+# External references, local backups, and unrelated capture/test data
+/Backup/
+/banner-phan-thuong/
+/capcut-cli-master/
+/local_reference/
+/mediastudio_beta_testpack/

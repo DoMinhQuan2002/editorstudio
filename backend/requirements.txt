@@ -1,0 +1,22 @@
+fastapi==0.115.12
+uvicorn==0.34.2
+python-multipart==0.0.20
+pydantic==2.11.4
+Pillow==11.2.1
+numpy==1.26.4
+opencv-python==4.11.0.86
+opencv-python-headless==4.11.0.86
+basicsr==1.4.2
+vtracer==0.6.15
+pyclipper==1.4.0
+# rembg ships the ONNX Runtime build that decides where segmentation runs.
+# [cpu] is deliberate for portability, but this machine reports a CUDA GPU and
+# BiRefNet (see video_editor/cutout.py) is slow enough on CPU that the desktop
+# poll can outlast a run. To move cutouts onto the GPU, in the backend venv:
+#   pip uninstall -y onnxruntime
+#   pip install onnxruntime-gpu
+# onnxruntime-gpu needs matching CUDA/cuDNN runtime libraries on PATH; if it
+# cannot find them it falls back to CPU or fails to create a session, so verify
+# with:  python -c "import onnxruntime; print(onnxruntime.get_available_providers())"
+# and expect CUDAExecutionProvider in the list.
+rembg[cpu]==2.0.69

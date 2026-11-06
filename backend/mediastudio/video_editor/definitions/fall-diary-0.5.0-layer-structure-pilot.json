@@ -1,0 +1,510 @@
+{
+  "schemaVersion": 1,
+  "templateId": "fall-diary",
+  "version": "0.5.0-layer-structure-pilot",
+  "name": "Fall Diary Layer Structure Pilot 0.5",
+  "width": 720,
+  "height": 1556,
+  "frameRateNumerator": 30,
+  "frameRateDenominator": 1,
+  "durationTicks": 1530000,
+  "demoAssetReference": null,
+  "posterAssetReference": null,
+  "audioAssetReference": null,
+  "supportedCapabilities": [
+    "full_frame_image",
+    "hard_cut",
+    "multi_layer_collage",
+    "safe_area_contain_cards",
+    "independent_visual_event_timing_90khz",
+    "linear_keyframes_90khz",
+    "dynamic_position_scale_rotation_opacity",
+    "preview_export_shared_renderer",
+    "image_slot_reuse",
+    "event_classification_evidence",
+    "versioned_editorial_safe_layout",
+    "static_template_image_asset"
+  ],
+  "slots": [
+    {
+      "slotId": "photo-01",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-02",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-03",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-04",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-05",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-06",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-07",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-08",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-09",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-10",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    },
+    {
+      "slotId": "photo-11",
+      "allowedMediaKinds": [
+        "image"
+      ],
+      "required": true,
+      "reusePolicy": "allow",
+      "missingSlotPolicy": "error"
+    }
+  ],
+  "events": [
+    {
+      "eventId": "background-opening",
+      "timelineStartTicks": 0,
+      "durationTicks": 519000,
+      "layers": [
+        {
+          "layerId": "background-opening",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-01",
+          "fitMode": "cover",
+          "positionX": 0.0,
+          "positionY": 0.0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 519000,
+              "value": 1.012,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ],
+          "motionClassification": "EDITORIAL_MOTION"
+        }
+      ],
+      "eventClassification": "UNKNOWN",
+      "sourceEvidence": "Isolated Muse preview frames 0.000s, 3.700s, 3.767s and 3.833s retain the same tree/street landmarks; source in-point is unknown."
+    },
+    {
+      "eventId": "background-autumn-park",
+      "timelineStartTicks": 519000,
+      "durationTicks": 360000,
+      "layers": [
+        {
+          "layerId": "background-autumn-park",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-02",
+          "fitMode": "cover",
+          "positionX": 0.0,
+          "positionY": 0.0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 360000,
+              "value": 1.012,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ],
+          "motionClassification": "EDITORIAL_MOTION"
+        }
+      ],
+      "eventClassification": "BACKGROUND_CUT",
+      "sourceEvidence": "Frames 5.767s, 5.833s, 6.700s and 6.833s show the autumn-park scene; 5.767s is a likely background cut."
+    },
+    {
+      "eventId": "background-picnic",
+      "timelineStartTicks": 879000,
+      "durationTicks": 315000,
+      "layers": [
+        {
+          "layerId": "background-picnic",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-03",
+          "fitMode": "cover",
+          "positionX": 0.0,
+          "positionY": 0.0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 315000,
+              "value": 1.012,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ],
+          "motionClassification": "EDITORIAL_MOTION"
+        }
+      ],
+      "eventClassification": "BACKGROUND_CUT",
+      "sourceEvidence": "Frames 9.767s, 9.833s, 10.200s and 10.333s show the leaf-ground/picnic scene; 9.767s is a likely cut."
+    },
+    {
+      "eventId": "background-food-insert",
+      "timelineStartTicks": 1194000,
+      "durationTicks": 45000,
+      "layers": [
+        {
+          "layerId": "background-food-insert",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-04",
+          "fitMode": "cover",
+          "positionX": 0.0,
+          "positionY": 0.0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 45000,
+              "value": 1.012,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ],
+          "motionClassification": "EDITORIAL_MOTION"
+        }
+      ],
+      "eventClassification": "UNKNOWN",
+      "sourceEvidence": "Frames 13.200s, 13.267s, 13.333s and 13.700s show a tighter food composition; a background cut versus a large foreground insert cannot be separated with confidence."
+    },
+    {
+      "eventId": "background-bouquet-close",
+      "timelineStartTicks": 1239000,
+      "durationTicks": 291000,
+      "layers": [
+        {
+          "layerId": "background-bouquet-close",
+          "kind": "image",
+          "layerOrder": 0,
+          "slotId": "photo-05",
+          "fitMode": "cover",
+          "positionX": 0.0,
+          "positionY": 0.0,
+          "scale": 1.0,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [
+            {
+              "property": "scale",
+              "timeTicks": 0,
+              "value": 1.0,
+              "interpolation": "linear",
+              "easing": "linear"
+            },
+            {
+              "property": "scale",
+              "timeTicks": 291000,
+              "value": 1.012,
+              "interpolation": "linear",
+              "easing": "linear"
+            }
+          ],
+          "motionClassification": "EDITORIAL_MOTION"
+        }
+      ],
+      "eventClassification": "BACKGROUND_CUT",
+      "sourceEvidence": "Frames 13.700s, 13.767s and 13.833s change from the food scene to a flower/lap composition; likely cut."
+    },
+    {
+      "eventId": "overlay-pour-replacement",
+      "timelineStartTicks": 339000,
+      "durationTicks": 135000,
+      "layers": [
+        {
+          "layerId": "pour-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-06",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": 0.3,
+          "scale": 0.18,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ],
+      "eventClassification": "OVERLAY_REPLACEMENT",
+      "sourceEvidence": "Frames 3.700s/3.767s/3.833s: tree and street background landmarks persist while foreground content changes."
+    },
+    {
+      "eventId": "overlay-basket-replacement",
+      "timelineStartTicks": 474000,
+      "durationTicks": 135000,
+      "layers": [
+        {
+          "layerId": "basket-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-07",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": 0.3,
+          "scale": 0.18,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ],
+      "eventClassification": "OVERLAY_REPLACEMENT",
+      "sourceEvidence": "Frames 5.200s/5.267s/5.333s: the tree/street background persists while a basket/collage replaces the prior insert."
+    },
+    {
+      "eventId": "overlay-park-figure",
+      "timelineStartTicks": 609000,
+      "durationTicks": 225000,
+      "layers": [
+        {
+          "layerId": "park-figure-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-08",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": 0.3,
+          "scale": 0.18,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ],
+      "eventClassification": "OVERLAY_REPLACEMENT",
+      "sourceEvidence": "Frames 6.700s/6.767s/6.833s: autumn-park background persists while foreground content changes."
+    },
+    {
+      "eventId": "overlay-coffee-close",
+      "timelineStartTicks": 834000,
+      "durationTicks": 45000,
+      "layers": [
+        {
+          "layerId": "coffee-close-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-09",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": 0.3,
+          "scale": 0.18,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ],
+      "eventClassification": "OVERLAY_REPLACEMENT",
+      "sourceEvidence": "Frames 9.200s/9.267s/9.333s: autumn background persists while the foreground insert changes."
+    },
+    {
+      "eventId": "overlay-picnic-transition",
+      "timelineStartTicks": 879000,
+      "durationTicks": 45000,
+      "layers": [
+        {
+          "layerId": "picnic-transition-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-10",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": 0.3,
+          "scale": 0.18,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ],
+      "eventClassification": "OVERLAY_REPLACEMENT",
+      "sourceEvidence": "Frames 9.700s/9.767s/9.833s: foreground and background both change near the same boundary; overlay event is kept independent, but exact source layer split has medium confidence."
+    },
+    {
+      "eventId": "overlay-market-figure",
+      "timelineStartTicks": 924000,
+      "durationTicks": 270000,
+      "layers": [
+        {
+          "layerId": "market-figure-card",
+          "kind": "image",
+          "layerOrder": 1,
+          "slotId": "photo-11",
+          "fitMode": "contain",
+          "positionX": 0.28,
+          "positionY": 0.3,
+          "scale": 0.18,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ],
+      "eventClassification": "OVERLAY_REPLACEMENT",
+      "sourceEvidence": "Frames 10.200s/10.267s/10.333s: leaf-ground/picnic landmarks persist while foreground content changes."
+    },
+    {
+      "eventId": "title-graphic",
+      "timelineStartTicks": 0,
+      "durationTicks": 1530000,
+      "layers": [
+        {
+          "layerId": "title-fall-diary-vector",
+          "kind": "image",
+          "layerOrder": 20,
+          "assetReference": "assets/fall_diary_vector.png",
+          "fitMode": "contain",
+          "positionX": 0.0,
+          "positionY": 0.006,
+          "scale": 0.42,
+          "rotation": 0.0,
+          "opacity": 1.0,
+          "effect": "none",
+          "keyframes": [],
+          "motionClassification": "UNVERIFIED"
+        }
+      ],
+      "eventClassification": "UNKNOWN",
+      "sourceEvidence": "The supplied Fall Diary keycap SVG is centered over the composition for the full template duration."
+    }
+  ],
+  "assetDependencies": [],
+  "metadata": {
+    "layoutProfile": {
+      "id": "editorial-safe-v1",
+      "version": 1
+    },
+    "layoutIntent": "Keep title and contained cards in fixed canvas safe areas; no subject detection or face-aware placement.",
+    "referenceLayoutBaseline": "fall-diary/0.4.0-editorial-motion-pilot and 0.3.0-reference-pilot",
+    "editorialAssumptions": [
+      "Background and overlay events are separate; candidate overlay replacements do not split the background timeline.",
+      "The 1.2 percent linear background push-in is editorial motion and is not restored Muse keyframe data.",
+      "Static overlay positions and smaller card scale are editorial layout choices.",
+      "The end of the title event at 17 seconds is an explicit pilot assumption; reference visibility after 13.833 seconds is obscured.",
+      "No cutout masks, segmentation, audio, or source media IDs are included."
+    ]
+  }
+}

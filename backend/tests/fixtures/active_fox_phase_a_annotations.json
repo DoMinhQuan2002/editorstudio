@@ -1,0 +1,28 @@
+{
+  "description": "Manual source-image landmarks and regression ROIs for Phase A only. These are test annotations, not production algorithm coordinates or ground-truth soft alpha.",
+  "fixture_sha256": "A34E92A5AB9066D71044D1DC05B7610F7A0B8377AF7A360DF7E51D99DD19C5D7",
+  "opaque_detail_points": {
+    "dark_nose": [[240, 201], [240, 204]],
+    "white_eye": [[300, 187], [299, 186]],
+    "inner_ear": [[330, 151], [331, 152]],
+    "cream_fur": [[315, 227], [325, 230]],
+    "thin_yellow_highlight": [[239, 279], [238, 278]],
+    "orange_body": [[216, 270]],
+    "yellow_tail_highlight": [[260, 132]],
+    "purple_letter": [[131, 378]]
+  },
+  "connected_background_points": [[0, 0], [277, 50], [150, 260], [290, 257], [275, 244], [250, 435]],
+  "soft_detail_points": [[296, 122], [294, 123]],
+  "background_hole_points": {
+    "active_title_A_counter": [124, 374],
+    "fox_title_O_counter": [386, 374],
+    "tagline_O_counter": [217, 421],
+    "tagline_A_counter": [251, 419],
+    "tagline_G_counter": [284, 421]
+  },
+  "regression_rois_xyxy": {
+    "fox_icon": [140, 110, 410, 340],
+    "active_fox_title": [95, 345, 460, 405],
+    "tagline": [185, 400, 368, 440]
+  }
+}

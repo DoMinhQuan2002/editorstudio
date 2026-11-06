@@ -1,0 +1,12 @@
+{
+  "status": "NOT_RUN_MISSING_INPUT",
+  "requestedSource": "FALL_DIARY_Reference_Kit.zip/demo MP4",
+  "searchedLocations": [
+    "workspace",
+    "C:/Users/Quan/.codex/attachments"
+  ],
+  "ffprobeAvailable": true,
+  "streams": null,
+  "format": null,
+  "note": "No video metadata was inferred because the requested MP4 was not present."
+}
